@@ -1,0 +1,817 @@
+/*
+    Created on : Nov 16, 2022
+    Author     : Matt, Steven, Jawon
+
+   to be updated after base functionality
+*/
+
+@import url("https://use.typekit.net/yky5car.css");
+
+*{
+    font-family: aviano-flare, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+html {
+    scroll-behavior: smooth;
+    color: black;
+}
+
+:root {
+    --accent-color1: dodgerblue;
+}
+
+body{
+    margin: 0;
+
+
+}
+
+.container{
+    background-color: white;
+
+}
+
+.grid-container {
+    margin: 10px auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+}
+
+.make, .model{
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.rcd-numbers {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    display: inline-block;
+}
+
+/* Home image */
+#wrapper {
+    background-image: url("https://hips.hearstapps.com/hmg-prod/images/polestar-2-001-1551208847.jpg");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 650px;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+/* */
+
+#wrapper * {
+    color: black;
+}
+
+#footer {
+    text-align: center;
+    background-color: #cccccc;
+    padding: 0.3em;
+}
+
+
+
+/* Header section */
+
+
+#suggestionDiv{
+
+    position: relative;
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    font-size: 0.85em;
+    z-index: 9999;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 2px 10px 12px 2px rgba(0,0,0,.175);
+}
+
+#suggestionDiv span {
+    display: block;
+    padding: 10px;
+    cursor: default;
+    min-width: 235px;
+    white-space: nowrap;
+    font-size: 16px;
+    border-radius: 5px
+}
+
+#suggestionDiv span:hover {
+    background-color: #b3cbf5;
+}
+
+
+.cm-navigation {
+    background: #ffffff;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.cm-burger-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#burger-nav {
+    fill: #575757;
+}
+
+.cm-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+}
+
+.cm-logo a img {
+    width: auto;
+    height: 50px;
+}
+
+.cm-nav nav {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cm-nav nav ul {
+    margin-right: 15px;
+    padding: 0;
+    display: flex;
+}
+
+.cm-nav nav ul li {
+    list-style: none;
+    display: flex;
+}
+
+.cm-nav nav ul li:not(:last-child) {
+    margin-right: 1.8em;
+}
+
+
+.cm-nav nav ul li a {
+    font-size: 0.9em;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: 300;
+}
+
+.cm-nav nav ul li a span {
+
+}
+
+.cm-nav nav ul li a span img {
+    width: 13px;
+    height: auto;
+}
+
+.cm-nav li {
+    font-size: 17px;
+
+}
+
+.cm-currency .cm-currency-link span {
+    margin-right: 0 !important;
+}
+
+.cm-currency .cm-currency-link span img {
+    width: 10px !important;
+}
+
+.cm-join-button-link:hover {
+    background: #000000;
+}
+
+.cm-cart {
+    width: 20px;
+    height: auto;
+    padding: 1%;
+}
+
+#cm-cart-link {
+    position: relative;
+}
+
+#cm-cart-link .cart-img {
+    width: 20px;
+    height: auto;
+}
+
+
+/* ===================================
+       Navbar Search Integrations
+   =================================== */
+
+.cm-nav-searchbar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 100%;
+}
+
+.cm-nav-searchbar .field-container {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 90%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cm-nav-searchbar .icons-container {
+    position: absolute;
+    top: 12px;
+    right: 4px;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+}
+
+.cm-nav-searchbar .icon-search {
+    position: relative;
+    top: 5px;
+    left: 4px;
+    width: 40%;
+    height: 40%;
+    opacity: 1;
+    border-radius: 50%;
+    border: 2px solid #bebebe;
+    transition: opacity 0.25s ease, transform 0.43s cubic-bezier(0.694, 0.048, 0.335, 1);
+}
+
+.cm-nav-searchbar .icon-search:after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    right: -2px;
+    width: 2px;
+    border-radius: 3px;
+    transform: rotate(-45deg);
+    height: 8px;
+    background-color: #bebebe;
+}
+
+.cm-nav-searchbar .search-field {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    background: #f7f7f7;
+    border-radius: 3px;
+    transition: all 0.4s ease;
+}
+
+.cm-nav-searchbar .search-field:focus {
+    outline: none;
+}
+
+.cm-nav-searchbar .search-field:focus+.icons-container .icon-close {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.cm-nav-searchbar .search-field:focus+.icons-container .icon-search {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* End of header */
+
+
+
+
+#main-header {
+    margin-top: 0.6em;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--accent-color1);
+}
+
+.home-btn {
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    background: dodgerblue;
+    color: #ffffff !important;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-weight: 100 !important;
+    font-size: 14px;
+    height: 32px;
+    border: none;
+    justify-content: center;
+    width: 10%;
+    padding: 10px;
+    margin-left: 45%;
+
+}
+
+.home-btn a:hover{
+    background-color: black;
+    color: white;
+}
+
+#viewInventory{
+    margin-left: 40px;
+}
+
+
+.car-details {
+    margin: 3px;
+    border: solid 1px black;
+    box-sizing: border-box;
+    letter-spacing: normal;
+    word-spacing: normal;
+    padding: 0 20px;
+    height: 50px;
+}
+
+
+/* new styling */
+:root {
+    --accent-color1: dodgerblue;
+    /* Margenes Bottom */
+    --mb-0-25: 0.25rem;
+    --mb-0-5: 0.5rem;
+    --mb-0-75: 0.75rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+}
+
+body{
+    margin: 0;
+
+
+}
+
+.container{
+    background-color: #F8F8F8;
+
+}
+
+.make, .model{
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.item {
+    min-height: 250px;
+    width: 250px;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 0 20px -10px rgb(0 0 0 / 50%);
+    transition: .2s ease-in-out;
+}
+
+.item:hover{
+    transform: scale(1.05);
+    transition: .2s ease-in-out
+}
+
+.item .carDetails{
+    margin-top: 30px;
+}
+
+
+#footer {
+    text-align: center;
+    background-color: #cccccc;
+    padding: 0.3em;
+}
+
+
+
+/* Header section */
+#searchbar {
+    float: right;
+    margin: 2em;
+}
+
+#searchtextbox{
+    font-size: 16px;
+    padding: 16px 30px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0, 60%);
+    margin-right: 10px;
+
+}
+
+#suggestionDiv{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    font-size: 0.85em;
+    z-index: 9999;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: 2px 10px 12px 2px rgba(0,0,0,.175);
+}
+
+#suggestionDiv span {
+    display: block;
+    padding: 10px;
+    cursor: default;
+    min-width: 235px;
+    white-space: nowrap;
+    font-size: 16px;
+    border-radius: 5px
+}
+
+#suggestionDiv span:hover {
+    background-color: #b3cbf5;
+}
+
+.cm-navigation-area {
+    -webkit-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    z-index: 5;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 0;
+
+}
+
+.cm-navigation {
+    background: #ffffff;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.cm-burger-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#burger-nav {
+    fill: #575757;
+}
+
+.cm-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+}
+
+.cm-logo a img {
+    width: auto;
+    height: 50px;
+}
+
+.cm-nav nav {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cm-nav nav ul {
+    margin-right: 15px;
+    padding: 0;
+    display: flex;
+}
+
+.cm-nav nav ul li {
+    list-style: none;
+    display: flex;
+}
+
+.cm-nav nav ul li:not(:last-child) {
+}
+
+
+.cm-nav nav ul li a {
+    font-size: 12px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-weight: 300;
+}
+
+.cm-nav nav ul li a span {
+
+}
+
+.cm-nav nav ul li a span img {
+    width: 13px;
+    height: auto;
+}
+
+.cm-currency {
+    font-size: 1rem;
+}
+
+.cm-currency .cm-currency-link span {
+    margin-right: 0 !important;
+}
+
+.cm-currency .cm-currency-link span img {
+    width: 10px !important;
+}
+
+
+.cm-join-button-link {
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    background: dodgerblue;
+    color: #ffffff !important;
+    text-decoration: none;
+    padding: 0 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    font-weight: 100 !important;
+    font-size: 14px;
+    height: 32px;
+}
+
+.cm-join-button-link:hover {
+    background: #000000;
+}
+
+.cm-cart {
+    width: 20px;
+    height: auto;
+    padding: 1%;
+}
+
+#cm-cart-link {
+    position: relative;
+}
+
+#cm-cart-link .cart-img {
+    width: 20px;
+    height: auto;
+}
+
+#cm-cart-link .cm-cart-badge:after {
+    position: absolute;
+    right: -5px;
+    top: -3px;
+    content: attr(data-count);
+    font-size: 60%;
+    width: 8px;
+    height: 8px;
+    padding: 0.3em;
+    border-radius: 50%;
+    line-height: 1em;
+    color: white;
+    background: dodgerblue;
+    text-align: center;
+    min-width: 1.2em;
+}
+
+
+/* ===================================
+       Navbar Search Integrations
+   =================================== */
+
+.cm-nav-searchbar {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 100%;
+}
+
+.cm-nav-searchbar .field-container {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 90%;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cm-nav-searchbar .icons-container {
+    position: absolute;
+    top: 12px;
+    right: 4px;
+    width: 35px;
+    height: 35px;
+    overflow: hidden;
+}
+
+.cm-nav-searchbar .icon-search {
+    position: relative;
+    top: 5px;
+    left: 4px;
+    width: 40%;
+    height: 40%;
+    opacity: 1;
+    border-radius: 50%;
+    border: 2px solid #bebebe;
+    transition: opacity 0.25s ease, transform 0.43s cubic-bezier(0.694, 0.048, 0.335, 1);
+}
+
+.cm-nav-searchbar .icon-search:after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    right: -2px;
+    width: 2px;
+    border-radius: 3px;
+    transform: rotate(-45deg);
+    height: 8px;
+    background-color: #bebebe;
+}
+
+.cm-nav-searchbar .search-field {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    background: #f7f7f7;
+    border-radius: 3px;
+    transition: all 0.4s ease;
+}
+
+/* End of header */
+
+#main-header {
+    margin-top: 0.6em;
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--accent-color1);
+}
+
+.home-btn a:hover{
+    background-color: black;
+    color: white;
+}
+
+#viewInventory{
+    margin-left: 40px;
+}
+
+/* Home Body */
+
+/* CATEGORY */
+.category__container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 2rem;
+}
+.category__data {
+    text-align: center;
+}
+.category__img {
+    width: 25px;
+    transition: 0.3s;
+}
+.category__title {
+    margin-bottom: var(--mb-0-25);
+}
+.category__data:hover .category__img {
+    transform: translateY(-0.5rem);
+}
+.grid {
+    display: flex;
+}
+
+
+.car-details {
+    margin: 3px;
+    border: solid 1px black;
+    box-sizing: border-box;
+    letter-spacing: normal;
+    word-spacing: normal;
+    padding: 0 20px;
+    height: 50px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+
+.login-container{
+    max-width: 1090px;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 20rem;
+    width: 100%;
+    position: relative;
+    gap: .5rem;
+}
+
+.form input:not(.btn){
+    width: 100%;
+    display: block;
+    font-size: 1rem;
+    padding: .75rem 1rem;
+    border: 1px solid #F9FBFC;
+    background: #F9FBFC;
+    border-radius: .5rem;
+    transition: all .25s ease 0s;
+    color: #212325;
+    box-shadow: 1px 2px 4px 0 #0b163c40;
+}
+
+.form input:focus:not(.btn){
+    border-color: #3461FD;
+    box-shadow: 1px 2px 4px 0 #0b163c40, 0 0 0 3px #3461FD80;
+}
+
+.btn{
+    width: 100%;
+    display: block;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: .75rem 1rem;
+    border: 1px solid #3461FD;
+    background: #3461FD;
+    border-radius: .5rem;
+    transition: all .25s ease 0s;
+    color: #E9EFF2;
+    cursor: pointer;
+    box-shadow: 0 3px 5px 0 #3461FD40;
+}
+
+.btn:hover, .btn:focus{
+    background: #3461FDDD;
+    border-color: #3461FDDD;
+    box-shadow: 0 3px 5px 0 #3461FD40, 0 0 0 3px #3461FD80;
+}
+
+.forgot-link{
+    font-size: .85rem;
+    width: 100%;
+    text-align: end;
+}
+
+.form-link-holder{
+    font-size: .9rem;
+    color: #404040;
+}
+
+.error-noti{
+    background: #DC3535;
+    padding: 1rem;
+    max-width: 20rem;
+    width: 100%;
+    border-radius: .5rem;
+    color: #E9EFF2;
+    box-shadow: 0 3px 5px 0 #3461FD40;
+}
+
+.error-input{
+    border-color: #DC3535 !important;
+}
+
+.error-input:focus{
+    box-shadow: 1px 2px 4px 0 #0b163c40, 0 0 0 3px #DC353580 !important;
+}
