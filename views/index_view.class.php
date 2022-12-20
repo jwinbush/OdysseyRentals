@@ -15,7 +15,7 @@ class IndexView
 
         ?>
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
         <head>
             <title> <?php echo $page_title ?> </title>
             <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
@@ -27,7 +27,7 @@ class IndexView
                 var base_url = "<?= BASE_URL ?>";
             </script>
         </head>
-        <body>
+
         <body>
         <header>
             <div class="cm-navigation-area">
@@ -89,9 +89,6 @@ class IndexView
                 </div>
             </div>
         </header>
-
-
-        </div>
         <?php
     }//end of displayHeader function
 
@@ -100,7 +97,6 @@ class IndexView
     {
         ?>
         <div id="push"></div>
-        </div>
         <div id="footer">&copy 2022 Car Website. All Rights Reserved.<br>This website is used for educational
             purposes only.
         </div>

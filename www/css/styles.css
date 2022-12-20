@@ -5,12 +5,15 @@
    to be updated after base functionality
 */
 
-@import url("https://use.typekit.net/yky5car.css");
+@font-face {
+    font-family: "Azoniz.otf";
+    src: url(/www/font/Azonix.otf) format("truetype");
+}
 
 *{
-    font-family: aviano-flare, sans-serif;
-    font-weight: 300;
+    font-family: "Azonix", sans-serif;
     font-style: normal;
+    font-weight: 200;
 }
 
 html {
@@ -361,11 +364,6 @@ body{
 body{
     margin: 0;
 
-
-}
-
-.container{
-    background-color: #F8F8F8;
 
 }
 

@@ -16,7 +16,7 @@ class HomeIndex extends IndexView {
 <div>
     <div id='wrapper'>
 
-        <h1 style=' font-size: 38px; vertical-align: top ; top: -5%; text-align: center; font-weight: 800;'> Take an adventure with Odyssey Rentals.</h1>
+        <h1 style=' font-size: 44px; vertical-align: top ; padding-top: 20px; text-align: center; font-weight: 100;'> Take an adventure with Odyssey Rentals.</h1>
         <p style='font-size: 14pt; text-align: center; font-weight: 400;'> Rent a car today.</p>
 
     </div>
