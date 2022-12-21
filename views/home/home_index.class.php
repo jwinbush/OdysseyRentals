@@ -22,29 +22,49 @@ class HomeIndex extends IndexView {
     </div>
 
 </div>
+        <a href="<?= BASE_URL ?>/car/index">
+            <div class="home-btn">
+                Look Around
+            </div>
+        </a>
 
-        <div class="home-btn">
-            <a href="<?= BASE_URL ?>/car/index">View Inventory</a>
-
-        </div>
 
         <!-- CATEGORY -->
-        <section class="section category">
-            <h2 class="section__title">Favorite Scare <br> Category </h2>
+        <section class="section category ">
+            <h2 class="section__title">Categories for you</h2>
             <div class="category__container container grid">
                 <div class="category__data">
-                    <img src="https://assets.codepen.io/7773162/category1-img.png" alt="" class="category__img">
-                    <h3 class="category__title">Ghosts</h3>
-                    <p class="category__description">Choose the ghosts, the scariest there are.</p>
+                    <a href="<?= BASE_URL ?>/car/search?query-terms=car">
+                        <img src="<?= BASE_URL ?>/www/img/cars/coupe.png" alt="" class="category__img">
+                    </a>
+                    <h3 class="category__title">Coupe</h3>
+                    <p class="category__description">Boasting a sizable dose of luxury.</p>
                 </div>
                 <div class="category__data">
-                    <img src="https://assets.codepen.io/7773162/category2-img.png" alt="" class="category__img">
-                    <h3 class="category__title">Pumpkins</h3>
+                    <img src="<?= BASE_URL ?>/www/img/cars/sedan.png" alt="" class="category__img">
+                    <h3 class="category__title ">Sedan</h3>
                     <p class="category__description">You look at the scariest pumpkins there is.</p>
                 </div>
                 <div class="category__data">
-                    <img src="https://assets.codepen.io/7773162/category3-img.png" alt="" class="category__img">
-                    <h3 class="category__title">Witch Hat</h3>
+                    <img src="<?= BASE_URL ?>/www/img/cars/pickup.png" alt="" class="category__img">
+                    <h3 class="category__title">Pickup</h3>
+                    <p class="category__description">Pick the most stylish witch hats out there.</p>
+                </div>
+                <div class="category__data">
+                    <a href="<?= BASE_URL ?>/car/search?query-terms=car">
+                        <img src="<?= BASE_URL ?>/www/img/cars/suv.png" alt="" class="category__img">
+                    </a>
+                    <h3 class="category__title">SUV</h3>
+                    <p class="category__description">Boasting a sizable dose of luxury.</p>
+                </div>
+                <div class="category__data">
+                    <img src="<?= BASE_URL ?>/www/img/cars/Van.png" alt="" class="category__img">
+                    <h3 class="category__title ">Van</h3>
+                    <p class="category__description">You look at the scariest pumpkins there is.</p>
+                </div>
+                <div class="category__data">
+                    <img src="<?= BASE_URL ?>/www/img/cars/minivan.png" alt="" class="category__img">
+                    <h3 class="category__title">Minivan</h3>
                     <p class="category__description">Pick the most stylish witch hats out there.</p>
                 </div>
             </div>

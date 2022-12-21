@@ -19,12 +19,20 @@ class IndexView
         <head>
             <title> <?php echo $page_title ?> </title>
             <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-            <link rel="icon" href='<?= BASE_URL ?>/www/img/odyssey.ico' type="image/png">
+            <link rel="icon" href='<?= BASE_URL ?>/www/img/cars/odyssey.ico' type="image/png">
             <link type='text/css' rel='stylesheet' href='<?= BASE_URL ?>/www/css/styles.css'/>
             <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
             <script>
                 //create the JavaScript variable for the base url
                 var base_url = "<?= BASE_URL ?>";
+
+                document.addEventListener('click', function handleClickOutsideBox(event) {
+                    const nav = document.getElementById('search-field');
+                    const box = document.getElementById('suggestionDiv');
+                    if (!nav.contains(event.target)) {
+                        box.style.border = 'none';
+                    }
+                });
             </script>
         </head>
 
@@ -41,7 +49,7 @@ class IndexView
 
                     <div class="cm-nav-searchbar">
                         <form method="get" action="<?= BASE_URL ?>/car/search"  class="field-container">
-                            <input type="text" name="query-terms" placeholder="Search cars.." class="search-field" autocomplete="off" onkeyup="handleKeyUp(event) "/>
+                            <input type="text" name="query-terms" placeholder="Search makes, models, keywords" class="search-field" autocomplete="off" onkeyup="handleKeyUp(event) "/>
                             <div class="icons-container">
                                 <div class="icon-search">
 

@@ -29,7 +29,7 @@ class CarDetail extends CarIndexView
             $image = BASE_URL . '/' . CAR_IMG . $image;
         }
         ?>
-
+<div class="details-background">
         <div id="main-header">Car Details</div>
         <hr>
         <div class="row">
@@ -99,7 +99,7 @@ class CarDetail extends CarIndexView
                onclick="window.location.href = '<?= BASE_URL ?>/car/edit/<?= $id ?>'">&nbsp;
         <br>
         <a href="<?= BASE_URL ?>/car/index">Go to car list</a>
-
+</div>
         <?php
         //display page footer
         parent::displayFooter();
