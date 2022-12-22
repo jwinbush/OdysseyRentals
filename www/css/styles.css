@@ -656,8 +656,12 @@ body{
     padding-bottom: 50px;
 
 }
+
+.category__description {
+text-align: center;
+}
 .category__img {
-    width: 400px;
+    width: 80%;
     transition: 0.7s;
 }
 .category__title {

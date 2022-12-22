@@ -143,10 +143,16 @@ class HomeIndex extends IndexView
         <section class="section about" id="about">
             <div class="about__container container grid">
                 <div class="about__data">
-                    <h2 class="section__title about__title">About Halloween <br> Night </h2>
-                    <p class="about__description">Night of all the saints, or all the dead, is celebrated on October 31
-                        and it is a very fun international celebration, this celebration comes from ancient origins, and
-                        is already celebrated by everyone. </p>
+                    <h2 class="section__title about__title">About Odyssey <br> Rentals </h2>
+                    <p class="about__description">
+                        Odyssey Rentals is an ongoing success story.
+                        Our guiding principles, and humble beginning, revolve around personal honesty and integrity.
+                        We believe in strengthening our communities one neighborhood at a time, serving our customers as if they were our family, and rewarding hard work.
+                        These things are as true today as they were when we were founded in 2022.
+                        Today, our massive network means Enterprise is the largest transportation solutions provider.
+                        We offer car and truck rentals, as well as car sharing and car sales. We're there when you need us with over 8,000 locations worldwide.
+                        We take an active role in sustainability, not only because it’s smart for our business, but because we believe in making the world a better place for future generations.
+                        Because of our size, we are in a unique position to foster innovation, advance research and test market-driven solutions. </p>
                     <a href="#" class="book--now">
                         <img src="https://assets.codepen.io/7773162/svgviewer-output+%281%29_3.svg" alt=""/>
                     </a>
