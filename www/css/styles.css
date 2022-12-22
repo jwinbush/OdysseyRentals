@@ -49,13 +49,6 @@ header {
 
 }
 
-.details-background {
-    background-image: url("/www/img/abstract-white.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .make, .model{
     font-weight: bold;
     font-size: 18px;
@@ -71,20 +64,20 @@ header {
 /* Home image */
 #wrapper {
     background-image: url("https://hips.hearstapps.com/hmg-prod/images/polestar-2-001-1551208847.jpg");
+    /* https://hips.hearstapps.com/hmg-prod/images/polestar-2-001-1551208847.jpg
+       https://cdn2.lamag.com/wp-content/uploads/sites/6/2021/01/2021_ID.4-Large-12268_1500x1000px.jpg
+       https://cdn2.lamag.com/wp-content/uploads/sites/6/2021/01/download-free-car-images.php_silo_1500x1000px.jpg
+     */
     background-position: bottom;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 650px;
+    height: 845px;
     width: 100%;
     left: 0;
     top: 0;
     z-index: -1;
 }
 /* */
-
-#wrapper * {
-    color: black;
-}
 
 #footer {
     text-align: center;
@@ -198,7 +191,6 @@ header {
 
 .cm-nav li {
     font-size: 17px;
-
 }
 
 .cm-currency .cm-currency-link span {
@@ -315,25 +307,6 @@ header {
     font-size: 2em;
     font-weight: bold;
     color: var(--accent-color1);
-}
-
-.home-btn {
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-    background-image: linear-gradient(to right, royalblue , dodgerblue);
-    text-decoration: none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    font-weight: 100 !important;
-    font-size: 12px;
-    height: 32px;
-    border: none;
-    width: 10%;
-    padding: 10px;
-    position: absolute;
-    left: 45%;
-    top: 650px;
 }
 
 .section__title {
@@ -527,11 +500,7 @@ body{
     justify-content: center;
     align-items: center;
     color: black;
-    font-weight: 300;
-}
-
-.cm-nav nav ul li a span {
-
+    font-weight: bold;
 }
 
 .cm-nav nav ul li a span img {
@@ -542,15 +511,6 @@ body{
 .cm-currency {
     font-size: 1rem;
 }
-
-.cm-currency .cm-currency-link span {
-    margin-right: 0 !important;
-}
-
-.cm-currency .cm-currency-link span img {
-    width: 10px !important;
-}
-
 
 .cm-join-button-link {
     transition: all 0.3s ease-in-out;
@@ -611,9 +571,10 @@ body{
 
 .cm-nav-searchbar {
     display: flex;
-    flex: 1;
     align-items: center;
-    height: 100%;
+    width: 100%;
+    justify-content: space-evenly;
+    align-content: stretch;
 }
 
 .cm-nav-searchbar .field-container {
@@ -692,17 +653,18 @@ body{
 }
 .category__data {
     text-align: center;
+    padding-bottom: 50px;
 
 }
 .category__img {
     width: 400px;
-    transition: 0.3s;
+    transition: 0.7s;
 }
 .category__title {
     margin-bottom: var(--mb-0-25);
 }
 .category__data:hover .category__img {
-    transform: translateY(-0.5rem);
+    transform: translateY(-0.7rem);
 }
 .grid {
     display: grid;
@@ -817,4 +779,147 @@ body{
 
 .error-input:focus{
     box-shadow: 1px 2px 4px 0 #0b163c40, 0 0 0 3px #DC353580 !important;
+}
+
+/* Hotel Reservations */
+#reserve__wrapper {
+    background-image: url("https://cdn2.lamag.com/wp-content/uploads/sites/6/2021/01/polestar_ft_POLESTAR_1500x1000px.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 900px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+h1 i {
+    padding-right: 10px;
+    font-size: 24px;
+}
+.hotel-reservation-form {
+    background-color: #fff;
+    width: 500px;
+    top:20%;
+    left: 12%;
+    box-shadow: 0 5px 5px 0 rgb(0 0 0 / 35%);
+    z-index: 1;
+    border-radius: 6px;
+    font-size: 12px;
+    position: absolute;
+}
+
+.hotel-reservation-form .fields {
+    position: relative;
+    padding: 20px;
+}
+.hotel-reservation-form select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #c7c9cb 50%), linear-gradient(135deg, #c7c9cb 50%, transparent 50%), linear-gradient(to right, #dfe0e0, #dfe0e0);
+    background-position: calc(100% - 20px) 20px, calc(100% - 15px) 20px, calc(100% - 40px) 10px;
+    background-size: 5px 5px, 5px 5px, 1px 25px;
+    background-repeat: no-repeat;
+}
+.hotel-reservation-form select option:first-child {
+    display: none;
+}
+.hotel-reservation-form input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    color: #ddd;
+    filter: invert(0.8);
+}
+.hotel-reservation-form input[type="text"],
+.hotel-reservation-form input[type="email"],
+.hotel-reservation-form input[type="datetime-local"],
+.hotel-reservation-form input[type="tel"],
+.hotel-reservation-form select {
+    display: flex;
+    margin-top: 2px;
+    padding: 10px;
+    border: 1px solid #dfe0e0;
+    width: 100%;
+    flex-basis: 100%;
+    height: 47px;
+}
+.hotel-reservation-form input[type="text"]:focus,
+.hotel-reservation-form input[type="email"]:focus,
+.hotel-reservation-form input[type="tel"]:focus,
+.hotel-reservation-form input[type="datetime-local  "]:focus,
+.hotel-reservation-form select:focus {
+    border: 1px solid #c6c7c7;
+}
+.hotel-reservation-form input[type="text"]::placeholder,
+.hotel-reservation-form input[type="email"]::placeholder,
+.hotel-reservation-form input[type="tel"]::placeholder,
+.hotel-reservation-form input[type="datetime-local"]:invalid,
+.hotel-reservation-form textarea::placeholder,
+.hotel-reservation-form select:invalid {
+    color: #858688;
+}
+
+.hotel-reservation-form textarea {
+    resize: none;
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #dfe0e0;
+    width: 100%;
+    height: 150px;
+}
+.hotel-reservation-form textarea:focus {
+    border: 1px solid #c6c7c7;
+}
+.hotel-reservation-form input[type="submit"] {
+    display: block;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    transition: all 0.5s ease-in-out;
+    background-image: linear-gradient(to right, royalblue , dodgerblue);
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+
+}
+.hotel-reservation-form input[type="submit"]:hover {
+    background-image: linear-gradient(to right, deepskyblue , dodgerblue);
+}
+
+.hotel-reservation-form input[name="email"] {
+    position: relative;
+    display: block;
+}
+.hotel-reservation-form .field {
+    display: inline-flex;
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px;
+}
+.hotel-reservation-form label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #8e939b;
+}
+.hotel-reservation-form .field i {
+    position: absolute;
+    color: #dfe2e5;
+    top: 25px;
+    left: 15px;
+    z-index: 10;
+}
+.hotel-reservation-form .field i ~ input {
+    padding-left: 45px !important;
+}
+.hotel-reservation-form .responses {
+    padding: 15px;
+    margin: 0;
+}
+.hotel-reservation-form .fields .wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.hotel-reservation-form .fields .wrapper > div {
+    width: 100%;
+}
+.hotel-reservation-form .fields .wrapper .gap {
+    width: 35px;
 }

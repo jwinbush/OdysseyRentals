@@ -41,7 +41,7 @@ class IndexView
             <div class="cm-navigation-area">
                 <div class="cm-navigation px-5-percent">
 
-                    <div class="cm-logo">
+                    <div class="cm-logo cm-logo-link">
                         <a class="cm-logo-link" href="<?= BASE_URL ?>" >
                             <img src='<?= BASE_URL ?>/www/img/odysseyrental.png' alt="codesign">
                         </a>
@@ -63,8 +63,26 @@ class IndexView
                         <nav>
                             <ul>
                                 <li class="cm-currency">
+                                    <a class="cm-currency-link" href="<?= BASE_URL ?>">
+                                        Home
+                                    </a>
+                                </li>
+
+                                <li class="cm-currency">
                                     <a class="cm-currency-link" href="<?= BASE_URL ?>/car/index">
                                         Vehicles
+                                    </a>
+                                </li>
+
+                                <li class="cm-currency">
+                                    <a class="cm-currency-link" href="<?= BASE_URL ?>/car/index">
+                                        Locations
+                                    </a>
+                                </li>
+
+                                <li class="cm-currency">
+                                    <a class="cm-currency-link" href="<?= BASE_URL ?>/car/index">
+                                        Reservations
                                     </a>
                                 </li>
 

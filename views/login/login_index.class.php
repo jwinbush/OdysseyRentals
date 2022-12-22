@@ -11,7 +11,7 @@ class LoginIndex extends IndexView {
 
     public function display() {
         //display page header
-        parent::displayHeader("Log In");
+        parent::displayHeader("Login | Odyssey Rentals");
         ?>
         <div id="main-header">Log In</div>
 
