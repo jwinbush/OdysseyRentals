@@ -8,4 +8,4 @@ When people travel via an airport they do not bring their car with them, making 
 Customers who may live by themselves or are in need of special accommodations may find that they are unable to find transportation to pick up their rental car. It may be that, due to supply shortages, they need to rent a vehicle from a location that is an inconvenient distance from their residence, or a less satisfactory vehicle from a nearby location. A service where you can rent a car temporarily for a few days while you cannot access your vehicle would solve this issue. Customers can even set a pick-up location to their house or a mechanic's shop, to continue their busy day without having to slow down due to not having a vehicle. The application will focus on being user-friendly and convenient to use.
 </p>
 
-<img width="1680" alt="OdysseyRent" src="https://user-images.githubusercontent.com/102334772/208851632-db1041a2-07f8-4624-b814-1ae8b09a8306.png">
+<img width="1680" alt="Screenshot 2022-12-22 at 2 26 12 AM" src="https://user-images.githubusercontent.com/102334772/209080294-b3ed8b08-f06d-4a67-a7ce-641681e0019d.png">
