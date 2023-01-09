@@ -45,14 +45,18 @@ header {
     margin: 10px auto;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: flex-start;
 
 }
 
 .make, .model{
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     letter-spacing: 1px;
+}
+
+.year {
+    font-size: 14px;
 }
 
 .rcd-numbers {
@@ -299,16 +303,6 @@ header {
 
 /* End of header */
 
-
-
-
-#main-header {
-    margin-top: 0.6em;
-    font-size: 2em;
-    font-weight: bold;
-    color: var(--accent-color1);
-}
-
 .section__title {
     text-align: center;
     padding: 20px;
@@ -356,13 +350,6 @@ a {
 body{
     margin: 0;
 
-
-}
-
-.make, .model{
-    font-weight: bold;
-    font-size: 18px;
-    letter-spacing: 1px;
 }
 
 .item {
@@ -636,7 +623,8 @@ body{
     margin-top: 0.6em;
     font-size: 2em;
     font-weight: bold;
-    color: var(--accent-color1);
+    color: black;
+    text-align: center;
 }
 
 #viewInventory{

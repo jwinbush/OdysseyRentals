@@ -17,7 +17,7 @@ class CarIndex extends CarIndexView {
         parent::displayHeader("List All Cars");
 
         ?>
-        <div id="main-header"> Cars on the Lot</div>
+        <div id="main-header"> Vehicles</div>
         <div class="container">
             <div style="padding: 0.6em">
                 <a href="<?= BASE_URL ?>/car/add">add a car to inventory</a>
