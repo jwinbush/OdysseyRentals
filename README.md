@@ -1,4 +1,5 @@
 <h1>Odyssey Rentals</h1>
+<h2>Adding on to group project</h2>
 
 <p>
 When people travel via an airport they do not bring their car with them, making traveling for your vacation a hassle. Other times your car may be getting lengthy repairs, leaving you without a vehicle for a few days. These and other situations make it hard to travel long distances. In any case, it is critical as a vehicle rental company to deliver quality service to those who are in need of a vehicle on short notice.
