@@ -13,11 +13,11 @@ class CarIndexView extends IndexView {
 
 
         ?>
+
         <script>
         //the media type
         var media = "car";
         </script>
-        <!-- create the search bar -->
 
         <?php
     }

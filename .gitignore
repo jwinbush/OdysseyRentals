@@ -4,3 +4,4 @@ modules.xml
 vcs.xml
 webServers.xml
 *.idea
+node_modules

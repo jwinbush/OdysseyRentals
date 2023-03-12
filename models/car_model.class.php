@@ -219,12 +219,13 @@ class CarModel
     }
 
     //the update_car method updates an existing car in the database. Details of the car are posted in a form. Return true if succeed; false otherwise.
-    public function update_car($id, $make, $model, $year, $price, $image, $description)
+    public function update_car($id, $category ,$make, $model, $year, $price, $image, $description)
     {
         try {
 
             //if the script did not received post data, display an error message and then terminite the script immediately
-            if (!filter_has_var(INPUT_POST, 'make') ||
+            if (!filter_has_var(INPUT_POST, 'catergory') ||
+                !filter_has_var(INPUT_POST, 'make') ||
                 !filter_has_var(INPUT_POST, 'model') ||
                 !filter_has_var(INPUT_POST, 'year') ||
                 !filter_has_var(INPUT_POST, 'image') ||
@@ -241,7 +242,7 @@ class CarModel
 
             //query string for update
             $sql = "UPDATE " . $this->tblCar .
-                " SET make='$make', model='$model', year='$year', image='$image', "
+                " SET category='$category', make='$make', model='$model', year='$year', image='$image', "
                 . "price='$price', description='$description' WHERE id= $id";
 
             //execute the query
@@ -321,10 +322,10 @@ class CarModel
     }
 
     // add new car to the database
-    public function create($id, $categoryId, $image, $description, $price, $make, $model, $year)
+    public function create($id, $category, $image, $description, $price, $make, $model, $year)
     {
         $id = $this->dbConnection->real_escape_string(trim($id));
-        $categoryId = $this->dbConnection->real_escape_string(trim($categoryId));
+        $category = $this->dbConnection->real_escape_string(trim($category));
         $image = $this->dbConnection->real_escape_string(trim($image));
         $description = $this->dbConnection->real_escape_string(trim($description));
         $price = $this->dbConnection->real_escape_string(trim($price));
@@ -333,8 +334,8 @@ class CarModel
         $year = $this->dbConnection->real_escape_string(trim($year));
 
         //query string for update
-        $sql = "INSERT INTO " . $this->tblCar . " (`car_id`, `category_id`, `image`, `description`, `price`, `make`, `model`, `year`)" .
-            "VALUES " . "('$id', '$categoryId', '$image', '$description', '$price', '$make', '$model', '$year')";
+        $sql = "INSERT INTO " . $this->tblCar . " (`car_id`, `category`, `image`, `description`, `price`, `make`, `model`, `year`)" .
+            "VALUES " . "('$id', '$category', '$image', '$description', '$price', '$make', '$model', '$year')";
 
         try {
 
