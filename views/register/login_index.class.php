@@ -2,18 +2,18 @@
 /**
  * Author: Steven Casada
  * Date: 12/8/2022
- * File: login_index.class.php
+ * File: register.class.php
  * Description: Log in form
  */
 
-class LoginIndex extends IndexView
+class RegisterIndex extends IndexView
 {
 
 
     public function display()
     {
         //display page header
-        parent::displayHeader("Login | Odyssey Rentals");
+        parent::displayHeader("Sign Up | Odyssey Rentals");
         ?>
         <body>
         <!-- component -->
@@ -68,11 +68,11 @@ class LoginIndex extends IndexView
                         <input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Password"/>
                     </div>
                     <button type="submit"
-                            class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login
+                            class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Sign Up
                     </button>
                     <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
 
-                    <!--Login checkbox confirmation-->
+                    <!--Sign up checkbox confirmation-->
                     <fieldset class="pt-10">
                         <legend class="sr-only">Checkbox variants</legend>
 

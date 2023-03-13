@@ -57,7 +57,7 @@ class CarSearch extends CarIndexView {
 
        <!-- display all records in a grid -->
          <div class="h-full text-md px-2">
-             <div class='grid justify-evenly sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+             <div class='grid justify-evenly grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
             <?php
             if ($cars === 0) {
                 echo "No car was found.<br><br><br><br><br>";
@@ -80,9 +80,7 @@ class CarSearch extends CarIndexView {
 //                    "'></a>" . /*<span>$make<br>$model<br>$carCategory</span>*/"</p></div>";
 //                    ?>
 <!--                    --><?php
-        if ($i % 6 == 5 || $i == count($cars) - 1) {
-              echo "</div>";
-        }
+
                     echo "<div class='rounded-lg bg-white shadow-md max-w-50 dark:bg-neutral-700'>
 <p><a href='", BASE_URL, "/car/detail/$id' data-te-ripple-init data-te-ripple-color='light'>
 <img class='rounded-t-lg w-full h-full' src='" . $image . "'></a>

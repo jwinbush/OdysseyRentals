@@ -45,14 +45,15 @@ class IndexView
 
         <body>
         <header>
-
-            <nav class="fixed w-full shadow-md bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+            <div id="gradient" class="py-1 fixed w-full z-50"></div>
+            <nav class="fixed w-full shadow-md bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
                 <div class="container flex flex-wrap items-center justify-between mx-auto">
                     <a href="<?= BASE_URL ?>" class="flex items-center">
-                        <img src="<?= BASE_URL?>/www/img/odysseyrental.png" class="h-6 mr-3 sm:h-9"
+                        <img src="<?= BASE_URL ?>/www/img/odysseyrental.png" class="lg:h-9 mr-3 h-6"
                              alt="Logo"/>
                         <span class="self-center text-xl lg:initial font-semibold whitespace-nowrap dark:text-white">Odyssey</span>
                     </a>
+
                     <div class="flex md:order-2">
                         <form method="get" action="<?= BASE_URL ?>/car/search">
                             <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
@@ -93,7 +94,10 @@ class IndexView
                                 </svg>
                             </button>
                         </form>
+
                     </div>
+
+
                     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
                          id="navbar-search">
                         <div class="relative mt-3 md:hidden">
@@ -105,10 +109,8 @@ class IndexView
                                           clip-rule="evenodd"></path>
                                 </svg>
                             </div>
-<!--                            <input type="text" id="search-navbar"-->
-<!--                                   class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"-->
-<!--                                   placeholder="Search...">-->
                         </div>
+
                         <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
                                 <a href="<?= BASE_URL ?>"
@@ -123,16 +125,31 @@ class IndexView
                                 <a href="#"
                                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Reservations</a>
                             </li>
-                            <li>
-                                <a href="<?= BASE_URL ?>/user/login"
-                                   class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Log in</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
 
+                        </ul>
+                        <div class="inline-flex rounded-md shadow-sm" role="group">
+
+                            <a href="<?= BASE_URL ?>/user/login">
+                                <button type="button"
+                                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                    Log in
+                                </button>
+                            </a>
+                            <a href="<?= BASE_URL ?>/user/register">
+                                <button type="button"
+                                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
+                                    Sign up
+                                </button>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </nav>
         </header>
+
 
         <?php
     }//end of displayHeader function
@@ -146,7 +163,7 @@ class IndexView
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="<?= BASE_URL ?>" class="flex items-center">
-                        <img src="<?= BASE_URL?>/www/img/odysseyrental.png" class="h-8 mr-3" alt="FlowBite Logo"/>
+                        <img src="<?= BASE_URL ?>/www/img/odysseyrental.png" class="h-8 mr-3" alt="FlowBite Logo"/>
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Odyssey</span>
                     </a>
                 </div>
