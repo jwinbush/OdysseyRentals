@@ -50,7 +50,6 @@ class UserController {
     }
 
     public function register() {
-
         //Create a register object and call appropriate view
         $view = new RegisterIndex();
         $view->display();

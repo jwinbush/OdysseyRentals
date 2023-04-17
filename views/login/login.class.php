@@ -2,7 +2,7 @@
 /*
 * Author: Matt Cool, Steven Casada, Jawon Winbush
 * Date: 12/7/22
-* Name: login.class.php
+* Name: register.class.php
 * Description: Create the form that lets the user login
 */
 class Login extends View{

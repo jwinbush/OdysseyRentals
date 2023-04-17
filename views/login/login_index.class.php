@@ -2,7 +2,7 @@
 /**
  * Author: Steven Casada
  * Date: 12/8/2022
- * File: login_index.class.php
+ * File: register_index.class.php
  * Description: Log in form
  */
 
@@ -15,17 +15,19 @@ class LoginIndex extends IndexView
         //display page header
         parent::displayHeader("Login | Odyssey Rentals");
         ?>
-        <body>
+        <body class="overflow-hidden">
         <!-- component -->
         <div class="h-screen md:flex">
             <div
-                    class="overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
-                <div>
-                    <h1 class="text-white font-bold text-4xl font-sans">GoFinance</h1>
-                    <p class="text-white mt-1">The most popular peer to peer lending at SEA</p>
+                    class="overflow-hidden md:flex w-3/4 bg-cover bg-center i justify-around items-center hidden" style="background-image: url('https://millionmilesecrets.com/wp-content/uploads/shutterstock_704175295-1.jpg')">
+                <div class="p-8 backdrop-blur-md">
+                    <h1 class="text-black font-bold text-2xl">Odyssey Rentals</h1>
+                    <p class="text-black mt-1">Odyssey Rentals</p>
+                <a  href="<?= BASE_URL ?>/user/register">
                     <button type="submit"
-                            class="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2">Read More
+                            class="block w-28 bg-gradient-to-r from-blue-500 to-cyan-400 text-white mt-4 py-2 rounded-lg font-bold mb-2">Sign up
                     </button>
+                </a>
                 </div>
 
             </div>
@@ -33,15 +35,7 @@ class LoginIndex extends IndexView
                 <form class="bg-white">
                     <h1 class="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
                     <p class="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
-                    <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-                             fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                  clip-rule="evenodd"/>
-                        </svg>
-                        <input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Full name"/>
-                    </div>
-                    <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                    <div class="flex items-center border-2 py-2 px-3 rounded-lg mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                              viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -49,7 +43,7 @@ class LoginIndex extends IndexView
                         </svg>
                         <input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Username"/>
                     </div>
-                    <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
+                    <div class="flex items-center border-2 py-2 px-3 rounded-lg mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                              viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -58,46 +52,21 @@ class LoginIndex extends IndexView
                         <input class="pl-2 outline-none border-none" type="text" name="" id=""
                                placeholder="Email Address"/>
                     </div>
-                    <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
+                    <div class="flex items-center border-2 py-2 px-3 rounded-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                              fill="currentColor">
                             <path fill-rule="evenodd"
                                   d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
                                   clip-rule="evenodd"/>
                         </svg>
-                        <input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Password"/>
+                        <input class="pl-2 outline-none border-none" type="password" name="" id="" placeholder="Password"/>
                     </div>
                     <button type="submit"
-                            class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login
+                            class="block w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white mt-4 py-2 rounded-lg text-white font-semibold mb-2">Sign in
                     </button>
                     <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
 
-                    <!--Login checkbox confirmation-->
-                    <fieldset class="pt-10">
-                        <legend class="sr-only">Checkbox variants</legend>
 
-                        <div class="flex items-center mb-4">
-                            <input checked id="checkbox-1" type="checkbox" value=""
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I
-                                agree to the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms
-                                    and conditions</a>.</label>
-                        </div>
-
-                        <div class="flex items-center mb-4">
-                            <input id="checkbox-2" type="checkbox" value=""
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I
-                                want to get promotional offers</label>
-                        </div>
-
-                        <div class="flex items-center mb-4">
-                            <input id="checkbox-3" type="checkbox" value=""
-                                   class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-3" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I
-                                am 18 years or older</label>
-                        </div>
-                    </fieldset>
 
                 </form>
 
@@ -139,7 +108,27 @@ class LoginIndex extends IndexView
 <!---->
         </body>
 
+<script >   // Grabs all the Elements by their IDs which we had given them
+    let modal = document.getElementById("defaultModal");
 
+    let btn = document.getElementById("terms");
+
+    let button = document.getElementById("accept");
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    // We want the modal to close when the OK button is clicked
+    button.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>
         <?php
         //display page footer
         parent::displayFooter();

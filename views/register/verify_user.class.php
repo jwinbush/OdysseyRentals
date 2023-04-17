@@ -36,7 +36,7 @@ class VerifyUser extends RegisterIndex {
             </div>
 
             <div class="options">
-                <span style="float: left"><a href="<?=BASE_URL?>/user/login">Log in</a></span>
+                <span style="float: left"><a href="<?=BASE_URL?>/user/register">Sign up</a></span>
             </div>
 
             <?php

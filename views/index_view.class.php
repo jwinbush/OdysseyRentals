@@ -22,7 +22,7 @@ class IndexView
             <link rel="icon" href='<?= BASE_URL ?>/www/img/cars/odyssey.ico' type="image/png">
             <link type='text/css' rel='stylesheet' href='<?= BASE_URL ?>/www/css/styles.css'/>
             <!--Tailwind CSS CDN-->
-            <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+            <script src="https://cdn.tailwindcss.com"></script>
 
             <!--jQuery CDN-->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -41,12 +41,27 @@ class IndexView
                 //     }
                 // });
             </script>
+
+            <script>
+                window.addEventListener('scroll', function() {
+                    var navbar = document.getElementById('navbar'); // Get the nav bar element
+                    var scrollTop = window.pageYOffset || document.documentElement.scrollTop; // Get the scroll position
+
+                    // Set the backdrop blur effect based on scroll position
+                    if (scrollTop > 100) {
+                        navbar.style.backdropFilter = 'blur(10px)'; // Apply blur effect
+                        navbar.style.backgroundColor = 'rgba(255,255,255,.32)';
+                    } else {
+                        navbar.style.backdropFilter = 'none'; // Remove blur effect
+                        navbar.style.opacity = '1'; // Restore opacity
+                    }
+                });
+            </script>
         </head>
 
         <body>
         <header>
-            <div id="gradient" class="py-1 fixed w-full z-50"></div>
-            <nav class="fixed w-full shadow-md bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
+            <nav id="navbar" class="scrolled fixed w-full px-2 sm:px-4 py-2.5 z-50" >
                 <div class="container flex flex-wrap items-center justify-between mx-auto">
                     <a href="<?= BASE_URL ?>" class="flex items-center">
                         <img src="<?= BASE_URL ?>/www/img/odysseyrental.png" class="lg:h-9 mr-3 h-6"
@@ -54,11 +69,11 @@ class IndexView
                         <span class="self-center text-xl lg:initial font-semibold whitespace-nowrap dark:text-white">Odyssey</span>
                     </a>
 
-                    <div class="flex md:order-2">
+                    <div class="flex">
                         <form method="get" action="<?= BASE_URL ?>/car/search">
                             <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
                                     aria-expanded="false"
-                                    class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+                                    class="lg:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -67,7 +82,7 @@ class IndexView
                                 </svg>
                                 <span class="sr-only">Search</span>
                             </button>
-                            <div class="relative hidden md:block">
+                            <div class="relative hidden lg:block">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                     <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor"
                                          viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +98,7 @@ class IndexView
 
                             </div>
                             <button data-collapse-toggle="navbar-search" type="button"
-                                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                     aria-controls="navbar-search" aria-expanded="false">
                                 <span class="sr-only">Open menu</span>
                                 <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
@@ -98,9 +113,9 @@ class IndexView
                     </div>
 
 
-                    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+                    <div class="items-center justify-between hidden w-full lg:flex md:w-auto md:order-1"
                          id="navbar-search">
-                        <div class="relative mt-3 md:hidden">
+                        <div class="relative mt-3 lg:hidden">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor"
                                      viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +126,7 @@ class IndexView
                             </div>
                         </div>
 
-                        <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
                                 <a href="<?= BASE_URL ?>"
                                    class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
@@ -123,25 +138,40 @@ class IndexView
                             </li>
                             <li>
                                 <a href="#"
-                                   class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Reservations</a>
+                                   class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Locations</a>
                             </li>
+                            <div>
+                                <a href="<?= BASE_URL ?>/user/login">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
+                                        <path d="M12 12c2.481 0 4.5-2.019 4.5-4.5S14.481 3 12 3 7.5 5.019 7.5 7.5 9.519 12 12 12zm0 2c-2.757 0-8 1.383-8 4v1h16v-1c0-2.617-5.243-4-8-4z"/>
+                                    </svg>
 
+                                </a>
+                            </div>
+
+                            <div>
+                                <a href="<?= BASE_URL ?>/cart">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
+
+                                </a>
+                            </div>
                         </ul>
-                        <div class="inline-flex rounded-md shadow-sm" role="group">
 
-                            <a href="<?= BASE_URL ?>/user/login">
-                                <button type="button"
-                                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                                    Log in
-                                </button>
-                            </a>
-                            <a href="<?= BASE_URL ?>/user/register">
-                                <button type="button"
-                                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">
-                                    Sign up
-                                </button>
-                            </a>
-                        </div>
+<!--                        <div class="inline-flex rounded-md shadow-sm" role="group">-->
+<!---->
+<!--                            <a href="--><?//= BASE_URL ?><!--/user/login">-->
+<!--                                <button type="button"-->
+<!--                                        class="px-4 py-2 text-sm font-medium text-gray-900 border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">-->
+<!--                                    Log in-->
+<!--                                </button>-->
+<!--                            </a>-->
+<!--                            <a href="--><?//= BASE_URL ?><!--/user/register">-->
+<!--                                <button type="button"-->
+<!--                                        class="px-4 py-2 text-sm font-medium text-gray-900 border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white">-->
+<!--                                    Sign up-->
+<!--                                </button>-->
+<!--                            </a>-->
+<!--                        </div>-->
 
                     </div>
 
@@ -149,6 +179,7 @@ class IndexView
 
             </nav>
         </header>
+
 
 
         <?php
@@ -163,7 +194,7 @@ class IndexView
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="<?= BASE_URL ?>" class="flex items-center">
-                        <img src="<?= BASE_URL ?>/www/img/odysseyrental.png" class="h-8 mr-3" alt="FlowBite Logo"/>
+                        <img src="<?= BASE_URL ?>/www/img/odysseyrental.png" class="h-8 mr-3" alt="Rental Logo"/>
                         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Odyssey</span>
                     </a>
                 </div>
@@ -172,21 +203,19 @@ class IndexView
                         <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                         <ul class="text-gray-600 dark:text-gray-400">
                             <li class="mb-4">
-                                <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
+                                <a href="https://jwinbush.com/" class="hover:underline">Odyssey</a>
                             </li>
-                            <li>
-                                <a href="https://tailwindcss.com/" class="hover:underline">Tailwind CSS</a>
-                            </li>
+
                         </ul>
                     </div>
                     <div>
                         <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
                         <ul class="text-gray-600 dark:text-gray-400">
                             <li class="mb-4">
-                                <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                                <a href="https://github.com/jwinbush" class="hover:underline ">Github</a>
                             </li>
                             <li>
-                                <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                                <a href="#" class="hover:underline">Discord</a>
                             </li>
                         </ul>
                     </div>
@@ -205,8 +234,8 @@ class IndexView
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"/>
             <div class="sm:flex sm:items-center sm:justify-between">
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/"
-                                                                                        class="hover:underline">Flowbite™</a>. All Rights Reserved.
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://jwinbush.com/"
+                                                                                        class="hover:underline">Odyssey ™</a>. All Rights Reserved.
         </span>
                 <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">

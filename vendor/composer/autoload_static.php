@@ -17,6 +17,8 @@ class ComposerStaticInitfe014b03f0bb186bd4ce9f1175abf8b3
         'CarIndexView' => __DIR__ . '/../..' . '/views/car/car_index_view.class.php',
         'CarModel' => __DIR__ . '/../..' . '/models/car_model.class.php',
         'CarSearch' => __DIR__ . '/../..' . '/views/car/search/car_search.class.php',
+        'CartController' => __DIR__ . '/../..' . '/controllers/cart_controller.php',
+        'CartIndex' => __DIR__ . '/../..' . '/views/cart/cart_index.class.php',
         'Category' => __DIR__ . '/../..' . '/models/category.class.php',
         'ComposerAutoloaderInitfe014b03f0bb186bd4ce9f1175abf8b3' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
@@ -35,10 +37,12 @@ class ComposerStaticInitfe014b03f0bb186bd4ce9f1175abf8b3
         'Login' => __DIR__ . '/../..' . '/views/login/login.class.php',
         'LoginIndex' => __DIR__ . '/../..' . '/views/login/login_index.class.php',
         'Logout' => __DIR__ . '/../..' . '/views/login/logout.class.php',
+        'Register' => __DIR__ . '/../..' . '/views/register/register.class.php',
+        'RegisterIndex' => __DIR__ . '/../..' . '/views/register/register_index.class.php',
         'User' => __DIR__ . '/../..' . '/models/user.class.php',
         'UserController' => __DIR__ . '/../..' . '/controllers/user_controller.class.php',
         'UserModel' => __DIR__ . '/../..' . '/models/user_model.class.php',
-        'VerifyUser' => __DIR__ . '/../..' . '/views/login/verify_user.class.php',
+        'VerifyUser' => __DIR__ . '/../..' . '/views/register/verify_user.class.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
