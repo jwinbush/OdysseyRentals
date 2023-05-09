@@ -54,9 +54,7 @@ class CarIndex extends CarIndexView
                 </nav>
                 <!-- Tailwind CSS Breadcrumb ending-->
             </section>
-            <div>
-                <a href="<?= BASE_URL ?>/car/add">add a car to inventory</a>
-            </div>
+
             <div class='grid justify-evenly sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
                 <?php
                 if ($cars === 0) {

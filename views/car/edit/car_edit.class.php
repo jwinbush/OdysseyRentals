@@ -12,49 +12,117 @@ class CarEdit extends CarIndexView {
         //display page header
         parent::displayHeader("Edit Car");
 
-        //get car categories from a session variable
-        if (isset($_SESSION['car_categories'])) {
-            $categories = $_SESSION['car_categories'];
-        }
-
-        //retrieve car details by calling get methods
-        $id = $car->getId();
+        $car_id = $car->getId();
+        $category = $car->getCategory();
         $make = $car->getMake();
         $model = $car->getModel();
         $year = $car->getYear();
         $image = $car->getImage();
-        $category = $car->getCategory();
+        $price = $car->getPrice();
         $description = $car->getDescription();
+
+        $URL = BASE_URL;
+
         ?>
+<div class="pt-20">
+    <div class="flex justify-center items-center h-screen pt-26">
+        <form class="w-full max-w-xl bg-white p-8 rounded-lg shadow-md" method='post' action='<?= BASE_URL ?>/car/update/<?=$car_id?>'>
+            <h2 class="text-xl font-bold mb-4">Car Information</h2>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="category">
+                    Category
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="category_id"
+                        value="<?= $category ?>"
+                        type="text"
 
-        <div id="main-header">Edit Car Details</div>
 
-        <!-- display car details in a form -->
-        <form class="new-media"  action='<?= BASE_URL . "/car/update/" . $id ?>' method="post" style=" margin-top: 10px; padding: 10px;">
-            <input type="hidden" name="id" value="<?= $id ?>">
-            <p>
-            <!-- <input style="min-width: 90%; padding-left: 8px;" name="category" placeholder="Category of the vehicle" type="text" size="100" value="<?= $category ?>" required autofocus></p>
-            <p><strong>Category</strong>: -->
-                <?php
-                /*
-                foreach ($categories as $c_category => $c_id) {
-                    $checked = ($category == $c_category ) ? "checked" : "";
-                    echo "<input type='radio' name='category' value='$c_id' $checked> $c_category &nbsp;&nbsp;";
-                }
-                    */
-                ?>
-            </p>
-            <p><input class="car-details" style="min-width: 90%; padding-left: 8px;" name="make" placeholder="Make: brand of the vehicle" type="text" size="100" value="<?= $make ?>" required></p>
-            <p><input class="car-details" style="min-width: 90%; padding-left: 8px;" name="model" placeholder="Model: specific type of vehicle" type="text" size="40" value="<?= $model ?>" required="">
-            <p><input class="car-details" style="min-width: 90%; padding-left: 8px;" name="year" placeholder="Model year: year the vehicle was manufactured" type="number" size="4" value="<?= $year ?>" required=""></p>
-            <p><input class="car-details" style="min-width: 90%; padding-left: 8px;" name="image" placeholder="Images: url (http:// or https://) or local file including path and file extension" type="text" size="100" required value="<?= $image ?>"></p>
-            <p>
-                <strong>Description</strong>:<br>
-                <textarea class="car-details" style="min-width: 90%; padding-left: 8px;" name="description" rows="8" cols="100"><?= $description ?></textarea>
-            </p>
-            <input type="submit" name="action" value="Update car">
-            <input type="button" value="Cancel" onclick='window.location.href = "<?= BASE_URL . "/car/detail/" . $id ?>"'>
+                >
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="make">
+                    Make
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="make"
+                        value="<?= $make ?>"
+                        type="text"
+
+                >
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="model">
+                    Model
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="model"
+                        value="<?= $model ?>"
+                        type="text"
+
+                >
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="year">
+                    Year
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="year"
+                        value="<?= $year ?>"
+                        type="number"
+                >
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="image">
+                    Image
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="image"
+                        value="<?= $image ?>"
+                        placeholder="Enter Image URL"
+                        type="text"
+                        required
+                >
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="description">
+                    Description
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="description"
+                        value="<?= $description ?>"
+                        type="text"
+                        placeholder="Enter Description"
+                        required
+                >
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="price">
+                    Price
+                </label>
+                <input
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        name="price"
+                        value="<?= $price ?>"
+                        type="number"
+                        placeholder="Enter Price"
+                        required
+                >
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Submit
+                </button>
+            </div>
         </form>
+    </div>
+</div>
         <?php
         //display page footer
         parent::displayFooter();

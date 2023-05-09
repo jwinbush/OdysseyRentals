@@ -1,19 +1,21 @@
 <?php
 
-/* Author: Matt Cool, Steven Casada, Jawon Winbush
+/**
 * Date: 12/6/22
  * user_controller.class.php
  * Controls methods for the user class
  */
 
-class UserModel{
+class UserModel {
+
+    //private data members
     private $db;
     private $dbConnection;
     static private $_instance = NULL;
     private $tblUser;
+    //the constructor. It initializes two data members.
 
-    //To use singleton pattern, this constructor is made private. To get an instance of the class, the getCarModel method must be called.
-    private function __construct()
+    public function __construct()
     {
         $this->db = Database::getInstance();
         $this->dbConnection = $this->db->getConnection();
@@ -28,13 +30,9 @@ class UserModel{
         foreach ($_GET as $key => $value) {
             $_GET[$key] = $this->dbConnection->real_escape_string($value);
         }
-
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
     }
 
-    //static method to ensure there is just one CarModel instance
+    //static method to ensure there is just one MovieModel instance
     public static function getUserModel() {
         if (self::$_instance == NULL) {
             self::$_instance = new UserModel();
@@ -42,86 +40,130 @@ class UserModel{
         return self::$_instance;
     }
 
-    //method for adding cars to the database
-    public function add_car($make, $model, $year, $image, $price){
+    public function verify_user($email, $password) {
+        $sql = "SELECT * FROM " . $this->tblUser .
+            " WHERE email='" . $email . "' AND password='" . $password . "'";
 
-        try{
+        //execute the query
+        $query = $this->dbConnection->query($sql);
 
-            $sql = "INSERT INTO" . $this->tblCar . "(make, model, year, image, price) . VALUES ('$make', '$model', '$year', '$image', '$price')";
+        // the search failed, return false.
+        if (!$query)
+            return false;
 
-            //execute the query
-            $query = $this->dbConnection->query($sql);
+        //search succeeded, but no user was found.
+        if ($query->num_rows == 0)
+            return 0;
 
-            if (!$query) {
-                throw new DatabaseExecutionException("Adding car failed");
-            }
+        $obj = $query->fetch_object();
 
-            return $query;
-        }
-        catch (DataMissingException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-        catch (DatabaseExecutionException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-        catch (InvalidDateException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-        catch (Exception $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
+        //create new user object
+        $user = new User($obj->isAdmin, $obj->email, $obj->password, $obj->firstname, $obj->lastname);
+
+        //set the userNum for the user
+        $user->setUserId($obj->user_id);
+
+        session_start();
+
+        $_SESSION['user_id'] = $obj->user_id;
+        $_SESSION['isAdmin'] = $obj->isAdmin;
+
+
+        return $user;
+    }
+
+    public function view_user($user_id) {
+        $sql = "SELECT * FROM " . $this->tblUser .
+            " WHERE user_id='" . $user_id . "'";
+
+        //execute the query
+        $query = $this->dbConnection->query($sql);
+
+        // the search failed, return false.
+        if (!$query)
+            return false;
+
+        //search succeeded, but no user was found.
+        if ($query->num_rows == 0)
+            return 0;
+
+        $obj = $query->fetch_object();
+
+        //create new user object
+        $user = new User($obj->isAdmin, $obj->email, $obj->password, $obj->firstname, $obj->lastname);
+
+        //set the userNum for the user
+        $user->setUserId($obj->user_id);
+
+        return $user;
     }
 
 
-    public function verify_user()
-    {
+    public function update_user($user_id) {
+        //if the script did not receive post data, display an error message and then terminite the script immediately
+        if (!filter_has_var(INPUT_POST, 'firstname') ||
+            !filter_has_var(INPUT_POST, 'lastname') ||
+            !filter_has_var(INPUT_POST, 'email') ||
+            !filter_has_var(INPUT_POST, 'password')) {
 
-        // Need to verify hashed password
-
-        // retrieve values from form
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-
-        //go into the database and check for username
-        $sql = "SELECT * FROM users WHERE (email = '" . $email . "')";
-        $result = mysqli_query($this->dbConnection, $sql);
-        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-        $hash = $row['password'];
-        $id = $row['id'];
-        $isAdmin = $row['isAdmin'];
-        $fname = $row['fname'];
-
-
-        if ($password == $hash) {
-            setcookie("email", $email);
-            setcookie('id', $id);
-            setcookie('isAdmin', $isAdmin);
-            setcookie('fname', $fname);
-            return true;
-        } else {
-            echo $row['password'];
-            echo $row['id'];
-            echo $row['fname'];
             return false;
         }
+
+        //retrieve data for the new book; data are sanitized and escaped for security.
+        $firstname = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING)));
+        $lastname = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING)));
+        $email = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'email', FILTER_DEFAULT));
+        $password = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
+
+        //query string for update
+        $sql = "UPDATE " . $this->tblUser .
+            " SET firstname='$firstname', lastname='$lastname', email='$email', "
+            . "password='$password' WHERE user_id='$user_id'";
+
+        //execute the query
+        return $this->dbConnection->query($sql);
     }
 
-    //unset a cookie to log the user out
-    public function logout() {
-        unset($_COOKIE['id']);
-        unset($_COOKIE['email']);
-        unset($_COOKIE['fname']);
-        unset($_COOKIE['isAdmin']);
-        return true;
+    public function add_user() {
+        //if the script did not receive post data, display an error message and then end the script immediately
+        if (!filter_has_var(INPUT_POST, 'firstname') ||
+            !filter_has_var(INPUT_POST, 'lastname') ||
+            !filter_has_var(INPUT_POST, 'email') ||
+            !filter_has_var(INPUT_POST, 'password')) {
+
+            return false;
+        }
+
+        //retrieve data for the new movie; data are sanitized and escaped for security.
+        $firstname = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING)));
+        $lastname = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING)));
+        $email = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'email', FILTER_DEFAULT));
+        $password = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'password', FILTER_DEFAULT));
+
+
+        try {
+            if (!preg_match("/^[_a-z0-9-]+(.[_a-z0-9-]+)@[a-z0-9-]+(.[a-z0-9-]+)(.[a-z]{2,3})$/i", $email)) {
+                throw new EmailException();
+            }
+        } catch (EmailException $e){
+            $message = $e->getDetails();
+            include('application/error.php');
+            exit();
+        }
+
+        //query string for update
+        $sql = "INSERT INTO `users` (`user_id`, `isAdmin`, `email`, `password`, `firstname`, `lastname`, `car_id`)
+                VALUES (null,'no','". $email . "','" . $password . "','" . $firstname . "','" . $lastname . "', null)";
+
+        //execute the query
+        return $this->dbConnection->query($sql);
     }
 
+    public function delete_user($user_id) {
+        $sql = "DELETE FROM `users` WHERE user_id = '" . $user_id . "'";
 
-
-
-
+        //execute the query
+        $this->dbConnection->query($sql);
+    }
 
 }

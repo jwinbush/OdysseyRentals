@@ -1,6 +1,5 @@
 <?php
 /**
- * Author: Matt Cool, Steven Casada, Jawon Winbush
  * Date: 12/8/2022
  * File: category.class.php
  * Description: define a class that describes category table

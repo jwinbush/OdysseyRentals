@@ -1,6 +1,5 @@
 <?php
 /**
- * Author: Matt Cool, Steven Casada, Jawon Winbush
  * Date: 11/17/2022
  * File: car.class.php
  * Description: define a class that describes car data
@@ -9,10 +8,10 @@
 class Car {
 
     // private attributes
-    private $id, $make, $model, $year, $image, $price, $description, $category;
+    private $id, $make, $model, $year, $image, $price, $description, $category, $amount;
 
     // define constructor
-    public function __construct($make, $model, $year, $image, $price, $description, $category) {
+    public function __construct($make, $model, $year, $image, $price, $description, $category, $amount) {
         $this->make = $make;
         $this->model = $model;
         $this->year = $year;
@@ -20,6 +19,9 @@ class Car {
         $this->price = $price;
         $this->description = $description;
         $this->category = $category;
+        $this->amount = $amount;
+
+
     }
 
     public function getId()
@@ -66,6 +68,12 @@ class Car {
     {
         return $this->category;
     }
+
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
 
 
 }

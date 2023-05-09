@@ -14,7 +14,7 @@ class CarError extends CarIndexView {
         parent::displayHeader("Error");
         ?>
 
-        <div id="main-header">Error</div>
+        <div id="pt-20">Error</div>
         <hr>
         <table style="width: 100%; border: none">
             <tr>

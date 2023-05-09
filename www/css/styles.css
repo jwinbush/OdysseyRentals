@@ -33,6 +33,8 @@
     filter: brightness(50%);
 }
 
-
+#map {
+    height: 100%;
+}
 
 

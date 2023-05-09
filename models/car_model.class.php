@@ -27,13 +27,13 @@ class CarModel
             }
             $this->tblCar = $this->db->getCarTable();
             $this->tblCarCategories = $this->db->getCarCategoriesTable();
-        }
-        catch (DatabaseExecutionException $exc) {
+            $this->tblCarUser = $this->db->getCarUsersTable();
+
+        } catch (DatabaseExecutionException $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
             exit(1);
-        }
-        catch (Exception $exc) {
+        } catch (Exception $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
             exit(1);
@@ -75,7 +75,7 @@ class CarModel
      * returns an array of car objects if successful or false if failed.
      */
 
-    public function list_car()
+    public function list_cars()
     {
         /* construct the sql SELECT statement in this format
          * SELECT ...
@@ -109,7 +109,7 @@ class CarModel
 
             //loop through all rows in the returned recordsets
             while ($obj = $query->fetch_object()) {
-                $car = new Car(stripslashes($obj->make), stripslashes($obj->model), stripslashes($obj->year), stripslashes($obj->image), stripslashes($obj->price), stripslashes($obj->description), stripslashes($obj->category));
+                $car = new Car(stripslashes($obj->make), stripslashes($obj->model), stripslashes($obj->year), stripslashes($obj->image), stripslashes($obj->price), stripslashes($obj->description), stripslashes($obj->category), stripslashes($obj->amount));
 
                 //set the id for the car
                 $car->setId($obj->car_id);
@@ -177,13 +177,24 @@ class CarModel
      * the viewCar method retrieves the details of the car specified by its id
      * and returns a car object. Return false if failed.
      */
+    public function rent_car($car_id, $user_id)
+    {
+        $sql = "INSERT INTO `car_users` (`user_id`, `car_id`) VALUES ('$user_id', '$car_id');";
 
-    public function view_car($id)
+        $this->dbConnection->query($sql);
+
+        $sql = "UPDATE `cars` SET `amount`= amount - 1 WHERE car_id='$car_id';";
+
+        return $this->dbConnection->query($sql);
+    }
+
+
+    public function view_car($car_id)
     {
         //the select sql statement
         $sql = "SELECT * FROM " . $this->tblCar . "," . $this->tblCarCategories .
             " WHERE " . $this->tblCar . ".category_id=" . $this->tblCarCategories . ".category_id" .
-            " AND " . $this->tblCar . ".car_id='$id'";
+            " AND " . $this->tblCar . ".car_id='$car_id'";
 
         try {
             //execute the query
@@ -198,7 +209,7 @@ class CarModel
                 $obj = $query->fetch_object();
 
                 //create a car object
-                $car = new Car(stripslashes($obj->make), stripslashes($obj->model), stripslashes($obj->year), stripslashes($obj->image), stripslashes($obj->price), stripslashes($obj->description), stripslashes($obj->category));
+                $car = new Car(stripslashes($obj->make), stripslashes($obj->model), stripslashes($obj->year), stripslashes($obj->image), stripslashes($obj->price), stripslashes($obj->description), stripslashes($obj->category), stripslashes($obj->amount));
 
                 //set the id for the car
                 $car->setId($obj->car_id);
@@ -207,65 +218,85 @@ class CarModel
             }
 
             return false;
-        }
-        catch (DatabaseExecutionException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-        catch (Exception $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-    }
-
-    //the update_car method updates an existing car in the database. Details of the car are posted in a form. Return true if succeed; false otherwise.
-    public function update_car($id, $category ,$make, $model, $year, $price, $image, $description)
-    {
-        try {
-
-            //if the script did not received post data, display an error message and then terminite the script immediately
-            if (!filter_has_var(INPUT_POST, 'catergory') ||
-                !filter_has_var(INPUT_POST, 'make') ||
-                !filter_has_var(INPUT_POST, 'model') ||
-                !filter_has_var(INPUT_POST, 'year') ||
-                !filter_has_var(INPUT_POST, 'image') ||
-                !filter_has_var(INPUT_POST, 'price') ||
-                !filter_has_var(INPUT_POST, 'description')) {
-
-                throw new DataMissingException("Missing data field. Please re-check your data");
-            }
-
-
-            if ((!strtotime($year))) {
-                throw new InvalidDateException("Car year is invalid");
-            }
-
-            //query string for update
-            $sql = "UPDATE " . $this->tblCar .
-                " SET category='$category', make='$make', model='$model', year='$year', image='$image', "
-                . "price='$price', description='$description' WHERE id= $id";
-
-            //execute the query
-            $query = $this->dbConnection->query($sql);
-
-            if (!$query) {
-                throw new DatabaseExecutionException("Updating car failed");
-            }
-
-            return $query;
-        } catch (DataMissingException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
         } catch (DatabaseExecutionException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        } catch (InvalidDateException $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
         } catch (Exception $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
         }
+    }
+
+    //search the database for flights that match words in titles. Return an array of movies if succeed; false otherwise.
+    public function user_cars($user_id) {
+
+        $sql = "SELECT * FROM " . $this->tblCar . ", " . $this->tblCarUser .
+            " WHERE " . $this->tblCarUser . ".user_id='" . $user_id . "' AND " . $this->tblCarUser . ".car_id = " . $this->tblCar . ".car_id";
+
+        //execute the query
+        $query = $this->dbConnection->query($sql);
+
+        // the search failed, return false.
+        if (!$query)
+            return false;
+
+        //search succeeded, but no flight was found.
+        if ($query->num_rows == 0)
+            return 0;
+
+        //search succeeded, and found at least 1 flight found.
+        //create an array to store all the returned movies
+        $cars = array();
+
+        //loop through all rows in the returned recordsets
+        while ($obj = $query->fetch_object()) {
+            $car = new Car(stripslashes($obj->make), stripslashes($obj->model), stripslashes($obj->year), stripslashes($obj->image), stripslashes($obj->price), stripslashes($obj->description), stripslashes($obj->category), stripslashes($obj->amount));
+
+            //set the id for the movie
+            $car->setId($obj->car_id);
+
+            //add the movie into the array
+            $cars[] = $car;
+        }
+        return $cars;
+    }
+
+    //the update_car method updates an existing car in the database. Details of the car are posted in a form. Return true if succeed; false otherwise.
+    public function update_car($car_id)
+    {
+
+        //if the script did not received post data, display an error message and then terminite the script immediately
+        if (!filter_has_var(INPUT_POST, 'make') ||
+            !filter_has_var(INPUT_POST, 'model') ||
+            !filter_has_var(INPUT_POST, 'category_id') ||
+            !filter_has_var(INPUT_POST, 'year') ||
+            !filter_has_var(INPUT_POST, 'image') ||
+            !filter_has_var(INPUT_POST, 'price') ||
+            !filter_has_var(INPUT_POST, 'amount') ||
+            !filter_has_var(INPUT_POST, 'description')) {
+
+            return false;
+        }
+
+        //retrieve data for the new movie; data are sanitized and escaped for security.
+        $make = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'make', FILTER_SANITIZE_STRING));
+        $model = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'model', FILTER_SANITIZE_STRING)));
+        $category_id = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT)));
+        $year = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'year', FILTER_DEFAULT));
+        $image = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING)));
+        $price = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT)));
+        $amount = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER_INT)));
+        $description = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'description', FILTER_DEFAULT));
+
+
+        //query string for update
+        $sql = "UPDATE " . $this->tblCar .
+            " SET make='$make', category_id='$category_id', model='$model', year='$year', image='$image',  price='$price', description='$description', amount='$amount' WHERE car_id='$car_id'";
+
+        //execute the query
+        return $this->dbConnection->query($sql);
+
+
     }
 
     //search the database for cars that match words in titles. Return an array of cars if succeed; false otherwise.
@@ -277,7 +308,7 @@ class CarModel
             " WHERE " . $this->tblCar . ".category_id=" . $this->tblCarCategories . ".category_id AND (1";
 
         foreach ($terms as $term) {
-            $sql .= " AND model LIKE '%" . $term . "%' OR make LIKE '" . $term . "%'";
+            $sql .= " AND model LIKE '%" . $term . "%' OR make LIKE '" . $term . "%' OR category LIKE '" . $term . "%'";
         }
 
         $sql .= ")";
@@ -301,7 +332,7 @@ class CarModel
 
             //loop through all rows in the returned recordsets
             while ($obj = $query->fetch_object()) {
-                $car = new Car($obj->make, $obj->model, $obj->year, $obj->image, $obj->price, $obj->description, $obj->category);
+                $car = new Car($obj->make, $obj->model, $obj->year, $obj->image, $obj->price, $obj->description, $obj->category, $obj->amount);
 
                 //set the id for the car
                 $car->setId($obj->car_id);
@@ -310,53 +341,85 @@ class CarModel
                 $cars[] = $car;
             }
             return $cars;
-        }
-        catch (DatabaseExecutionException $exc) {
+        } catch (DatabaseExecutionException $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
-        }
-        catch (Exception $exc) {
+        } catch (Exception $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
         }
     }
 
-    // add new car to the database
-    public function create($id, $category, $image, $description, $price, $make, $model, $year)
+    public function add_car($car_id)
     {
-        $id = $this->dbConnection->real_escape_string(trim($id));
-        $category = $this->dbConnection->real_escape_string(trim($category));
-        $image = $this->dbConnection->real_escape_string(trim($image));
-        $description = $this->dbConnection->real_escape_string(trim($description));
-        $price = $this->dbConnection->real_escape_string(trim($price));
-        $make = $this->dbConnection->real_escape_string(trim($make));
-        $model = $this->dbConnection->real_escape_string(trim($model));
-        $year = $this->dbConnection->real_escape_string(trim($year));
+        //check if there are post values
+        if (!filter_has_var(INPUT_POST, 'make') ||
+            !filter_has_var(INPUT_POST, 'model') ||
+            !filter_has_var(INPUT_POST, 'category_id') ||
+            !filter_has_var(INPUT_POST, 'year') ||
+            !filter_has_var(INPUT_POST, 'image') ||
+            !filter_has_var(INPUT_POST, 'price') ||
+            !filter_has_var(INPUT_POST, 'amount') ||
+            !filter_has_var(INPUT_POST, 'description')) {
 
-        //query string for update
-        $sql = "INSERT INTO " . $this->tblCar . " (`car_id`, `category`, `image`, `description`, `price`, `make`, `model`, `year`)" .
-            "VALUES " . "('$id', '$category', '$image', '$description', '$price', '$make', '$model', '$year')";
+            return false;
+        }
 
-        try {
+        //retrieve data for the new movie; data are sanitized and escaped for security.
+        $make = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'make', FILTER_SANITIZE_STRING));
+        $model = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'model', FILTER_SANITIZE_STRING)));
+        $category = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'category_id', FILTER_SANITIZE_NUMBER_INT)));
+        $year = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'year', FILTER_DEFAULT));
+        $image = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'image', FILTER_SANITIZE_URL)));
+        $price = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT)));
+        $amount = $this->dbConnection->real_escape_string(trim(filter_input(INPUT_POST, 'amount', FILTER_SANITIZE_NUMBER_INT)));
+        $description = $this->dbConnection->real_escape_string(filter_input(INPUT_POST, 'description', FILTER_DEFAULT));
+
+
+        $sql = "INSERT INTO `cars`(`car_id`, `make`, `model`, `year`, `image`, `description`, `amount`, `category_id`)
+                VALUES (NULL,'" . $make . "', '" . $model . "', '" . $year . "', '" . $image . "','" . $description . "', 5 ,'" . $category . "')";
 
         //execute the query
-        $query = $this->dbConnection->query($sql);
+        return $this->dbConnection->query($sql);
+//
+//        try {
+//            // the search failed, return false.
+//            if (!$query) {
+//                throw new QueryDatabaseException;
+//            }
+//
+//            //search succeeded, but no flight was found.
+//            if ($query->num_rows == 0) {
+//                throw new PlaneNumAuthenticationException;
+//            }
+//
+//        } catch (QueryDatabaseException $e) {
+//            $message = $e->getDetails();
+//            include('application/error.php');
+//            exit();
+//
+//        } catch (PlaneNumAuthenticationException $e) {
+//            $message = $e->getDetails();
+//            include('application/error.php');
+//            exit();
+//        }
 
-        if (!$query) {
-            throw new DatabaseExecutionException("An error occurred while try to insert the data");
-        }
-        return $query;
-        }
-        catch (DatabaseExecutionException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-        catch (Exception $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
+//        //create insert sql statement
+//        $sql = "INSERT INTO `cars`
+//                (`car_id`, `category_id`, `image`, `description`, `price`, `make`, `model`, `year`, `amount`)
+//                 VALUES (NULL,'$category','$image','$description ','$price','$make','$model','$year', 5)";
+//
+////        //run query
+//        return $this->dbConnection->query($sql);
     }
 
+    public function delete_cars($car_id)
+    {
+        $sql = "DELETE FROM `cars` WHERE car_id = '" . $car_id . "'";
+
+        //execute the query
+        $this->dbConnection->query($sql);
+    }
 
     //get the car categories
     private function get_car_category()
@@ -377,12 +440,10 @@ class CarModel
                 $category[$obj->category] = $obj->category_id;
             }
             return $categories;
-        }
-        catch (DatabaseExecutionException $exc) {
+        } catch (DatabaseExecutionException $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
-        }
-        catch (Exception $exc) {
+        } catch (Exception $exc) {
             $view = new CarError();
             $view->display($exc->getMessage());
         }

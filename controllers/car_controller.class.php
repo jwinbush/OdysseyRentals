@@ -6,9 +6,7 @@
  * perform the functions of the various class pages
  */
 
-class CarController
-{
-
+class CarController {
     private $car_model;
 
     // define constructor
@@ -22,7 +20,7 @@ class CarController
     public function index()
     {
         // get all the cars and return then in an array
-        $cars = $this->car_model->list_car();
+        $cars = $this->car_model->list_cars();
 
         if (!$cars) {
             //display an error
@@ -34,6 +32,24 @@ class CarController
         // display cars
         $view = new CarIndex();
         $view->display($cars);
+    }
+
+    public function update($car_id) {
+        //update the user
+        $update = $this->car_model->update_car($car_id);
+
+        if (!$update) {
+            //handle errors
+            $message = "There was a problem updating the car id='" . $car_id . "'.";
+            $this->error($message);
+            return;
+        }
+
+        //display the updated flight details
+        $car = $this->car_model->view_car($car_id);
+
+        $view = new CarDetail();
+        $view->display($car);
     }
 
     //show details of a car
@@ -53,40 +69,43 @@ class CarController
         $view->display($car);
     }
 
-    // add car to database
-    public function add()
-    {
-        $cars = $this->car_model->list_car();
 
-        // get the id of the last element
-        $index = (count($cars))-1;
-        $id = $cars[$index]->getId() ;
+    public function add() {
+        //add the user
+        $add = $this->car_model->add_car();
 
-        // add 1 to make unique id
-        $id += 1;
-
-        $categories = $this->car_model->list_categories();
-
-        // display all movies
-        $view = new AdminAddCar();
-        $view->display($id, $categories);
-    }
-
-    // edit existing car in database
-    public function edit($id)
-    {
-        //retrieve the specific car
-        $car = $this->car_model->view_car($id);
-
-        if (!$car) {
-            //display an error
-            $message = "There was a problem displaying the car with an id='" . $id . "'.";
+        if (!$add) {
+            //handle errors
+            $message = "There was a problem creating the car.";
             $this->error($message);
             return;
         }
 
+        //run controller's index function
+        $this->index();
+    }
+
+    public function edit($car_id) {
+        //retrieve the specific flight
+        $car = $this->car_model->view_car($car_id);
+
+        if (!$car) {
+            //display an error
+            $message = "There was a problem displaying the car car_id='" . $car_id . "'.";
+            $this->error($message);
+            return;
+        }
+
+        //display flights details
         $view = new CarEdit();
         $view->display($car);
+    }
+
+    public function delete($car_id) {
+        $this->car_model->delete_cars($car_id);
+
+        header("Location:" . BASE_URL . "/car/index"); /* Redirect browser */
+        exit();
     }
 
 
@@ -121,6 +140,7 @@ class CarController
         }
     }
 
+
     //autosuggest feature
     public function suggest($terms)
     {
@@ -149,79 +169,132 @@ class CarController
         $error->display($message);
     }
 
-    // add new car to the database
-    public function create()
-    {
-        try {
-            //if the script did not received post data, display an error message and then terminite the script immediately
-            if (!filter_has_var(INPUT_POST, 'id') ||
-                !filter_has_var(INPUT_POST, 'category') ||
-                !filter_has_var(INPUT_POST, 'make') ||
-                !filter_has_var(INPUT_POST, 'model') ||
-                !filter_has_var(INPUT_POST, 'year') ||
-                !filter_has_var(INPUT_POST, 'price') ||
-                !filter_has_var(INPUT_POST, 'image') ||
-                !filter_has_var(INPUT_POST, 'description')) {
+    //search flights
+    public function user($user_id) {
+        //search the database for matching flights
+        $cars = $this->car_model->user_cars($user_id);
 
-                throw new DataMissingException("A required field is missing");
-            }
-
-            $id = filter_input(INPUT_POST, 'id');
-            $category = filter_input(INPUT_POST, 'category');
-            $make = filter_input(INPUT_POST, 'make');
-            $model = filter_input(INPUT_POST, 'model');
-            $year = filter_input(INPUT_POST, 'year');
-            $price = filter_input(INPUT_POST, 'price');
-            $image = filter_input(INPUT_POST, 'image');
-            $description = filter_input(INPUT_POST, 'description');
-
-            $this->car_model->create($id, $category, $image, $description, $price, $make, $model, $year);
-
-            $car = new Car($make, $model, $year, $image, $price, $description, $category);
-
-            $view = new CarDetail();
-            $view->display($car);
+        if ($cars === false) {
+            //handle error
+            $message = "An error has occurred.";
+            $this->error($message);
+            return;
         }
-        catch(DataMissingException $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
-        catch (Exception $exc) {
-            $view = new CarError();
-            $view->display($exc->getMessage());
-        }
+
+        //display matched flights
+        $search = new CarUser();
+        $search->display($cars);
     }
 
-    public function update($id){
-        if (!filter_has_var(INPUT_POST, 'id') ||
-            !filter_has_var(INPUT_POST, 'make') ||
-            !filter_has_var(INPUT_POST, 'model') ||
-            !filter_has_var(INPUT_POST, 'year') ||
-            !filter_has_var(INPUT_POST, 'price') ||
-            !filter_has_var(INPUT_POST, 'image') ||
-            !filter_has_var(INPUT_POST, 'description')) {
+    //assign user to car
+    public function rent($car_id) {
+        session_start();
 
-            return false;
+        if (isset($_SESSION['user_id'])
+            && isset($_SESSION['isAdmin'])) {
+
+            $user_id = $_SESSION['user_id'];
+            $admin = $_SESSION['isAdmin'];
+        } else {
+            header(BASE_URL . "/user/login");
+            exit();
         }
 
-        $id = filter_input(INPUT_POST, 'id');
-        $make = filter_input(INPUT_POST, 'make');
-        $model = filter_input(INPUT_POST, 'model');
-        $year = filter_input(INPUT_POST, 'year');
-        $price = filter_input(INPUT_POST, 'price');
-        $image = filter_input(INPUT_POST, 'image');
-        $description = filter_input(INPUT_POST, 'description');
+        //retrieve the specific flight
+        $rent = $this->car_model->rent_car($car_id, $user_id);
 
-        $this->car_model->update_car($id, $make, $model, $year, $price, $image, $description);
+        if (!$rent) {
+            //handle errors
+            $message = "There was a problem purchase a car on the car num='" . $car_id . "'.";
+            $this->error($message);
+            return;
+        }
 
-        $car = new Car($make, $model, $year, $image, $price, $description);
-
-        $view = new CarDetail();
-        $view->display($car);
-
-
-
+        self::user($user_id);
     }
+
+    public function create() {
+        $create = new CarCreate();
+        $create->display();
+    }
+
+
+
+//    // add new car to the database
+//    public function create()
+//    {
+//        try {
+//            //if the script did not receive post data, display an error message and then terminate the script immediately
+//            if (!filter_has_var(INPUT_POST, 'id') ||
+//                !filter_has_var(INPUT_POST, 'category') ||
+//                !filter_has_var(INPUT_POST, 'make') ||
+//                !filter_has_var(INPUT_POST, 'model') ||
+//                !filter_has_var(INPUT_POST, 'year') ||
+//                !filter_has_var(INPUT_POST, 'price') ||
+//                !filter_has_var(INPUT_POST, 'image') ||
+//                !filter_has_var(INPUT_POST, 'description')) {
+//
+//                throw new DataMissingException("A required field is missing");
+//            }
+//
+//            $id = filter_input(INPUT_POST, 'id');
+//            $category = filter_input(INPUT_POST, 'category');
+//            $make = filter_input(INPUT_POST, 'make');
+//            $model = filter_input(INPUT_POST, 'model');
+//            $year = filter_input(INPUT_POST, 'year');
+//            $price = filter_input(INPUT_POST, 'price');
+//            $image = filter_input(INPUT_POST, 'image');
+//            $description = filter_input(INPUT_POST, 'description');
+//
+//            $this->car_model->create($id, $category, $image, $description, $price, $make, $model, $year);
+//
+//            $car = new Car($make, $model, $year, $image, $price, $description, $category);
+//
+//            $view = new CarDetail();
+//            $view->display($car);
+//        }
+//        catch(DataMissingException $exc) {
+//            $view = new CarError();
+//            $view->display($exc->getMessage());
+//        }
+//        catch (Exception $exc) {
+//            $view = new CarError();
+//            $view->display($exc->getMessage());
+//        }
+//    }
+//
+//    public function update($id){
+//        if (!filter_has_var(INPUT_POST, 'id') ||
+//            !filter_has_var(INPUT_POST, 'category') ||
+//            !filter_has_var(INPUT_POST, 'make') ||
+//            !filter_has_var(INPUT_POST, 'model') ||
+//            !filter_has_var(INPUT_POST, 'year') ||
+//            !filter_has_var(INPUT_POST, 'price') ||
+//            !filter_has_var(INPUT_POST, 'image') ||
+//            !filter_has_var(INPUT_POST, 'description')) {
+//
+//            return false;
+//        }
+//
+//        $id = filter_input(INPUT_POST, 'id');
+//        $category = filter_input(INPUT_POST, 'category');
+//        $make = filter_input(INPUT_POST, 'make');
+//        $model = filter_input(INPUT_POST, 'model');
+//        $year = filter_input(INPUT_POST, 'year');
+//        $price = filter_input(INPUT_POST, 'price');
+//        $image = filter_input(INPUT_POST, 'image');
+//        $description = filter_input(INPUT_POST, 'description');
+//
+//        $this->car_model->update_car($id, $category, $make, $model, $year, $price, $image, $description);
+//
+//        $car = new Car($category, $make, $model, $year, $image, $price, $description);
+//
+//        $view = new CarDetail();
+//        $view->display($car);
+//
+//
+//
+//    }
 
 
     //handle calling inaccessible methods

@@ -13,6 +13,19 @@ class IndexView
     static public function displayHeader($page_title)
     {
 
+        session_start();
+
+        $admin = "";
+        $user_id = "";
+
+        if (isset($_SESSION['user_id'])
+            && isset($_SESSION['isAdmin'])) {
+
+            $user_id = $_SESSION['user_id'];
+            $admin = $_SESSION['isAdmin'];
+
+        }
+
         ?>
         <!DOCTYPE html>
         <html lang="en">
@@ -136,25 +149,43 @@ class IndexView
                                 <a href="<?= BASE_URL ?>/car/index"
                                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Vehicles</a>
                             </li>
-                            <li>
-                                <a href="#"
-                                   class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Locations</a>
-                            </li>
-                            <li>
-                                <a href="<?= BASE_URL ?>/user/login">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
-                                        <path d="M12 12c2.481 0 4.5-2.019 4.5-4.5S14.481 3 12 3 7.5 5.019 7.5 7.5 9.519 12 12 12zm0 2c-2.757 0-8 1.383-8 4v1h16v-1c0-2.617-5.243-4-8-4z"/>
-                                    </svg>
+<!--                            <li>-->
+<!--                                <a href="--><?//= BASE_URL ?><!--/location"-->
+<!--                                   class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Locations</a>-->
+<!--                            </li>-->
+                            <?php
+                            if($admin == "yes") {
+                                ?>
+                                <a href="<?= BASE_URL ?>/car/create">Create</a>
+                                <?php
+                            }
 
-                                </a>
-                            </li>
+                            if($user_id != "") {
+                                ?>
+                                    <li>
+                                <a href="<?= BASE_URL ?>/user/detail/<?= $user_id ?>">Profile</a>
+                                    </li>
+                                <li>
+                                    <a href="<?= BASE_URL ?>/car/user/<?=$user_id?>">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
 
-                            <li>
-                                <a href="<?= BASE_URL ?>/cart">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 19.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5zm3.5-1.5c-.828 0-1.5.671-1.5 1.5s.672 1.5 1.5 1.5 1.5-.671 1.5-1.5c0-.828-.672-1.5-1.5-1.5zm1.336-5l1.977-7h-16.813l2.938 7h11.898zm4.969-10l-3.432 12h-12.597l.839 2h13.239l3.474-12h1.929l.743-2h-4.195z"/></svg>
+                                    </a>
+                                </li>
+                                <?php
+                            } else {
+                                ?>
+                                <li>
+                                    <a href="<?= BASE_URL ?>/user/login">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
+                                            <path d="M12 12c2.481 0 4.5-2.019 4.5-4.5S14.481 3 12 3 7.5 5.019 7.5 7.5 9.519 12 12 12zm0 2c-2.757 0-8 1.383-8 4v1h16v-1c0-2.617-5.243-4-8-4z"/>
+                                        </svg>
 
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                            ?>
+
                         </ul>
 
 <!--                        <div class="inline-flex rounded-md shadow-sm" role="group">-->

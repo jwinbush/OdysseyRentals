@@ -87,7 +87,7 @@ class CarSearch extends CarIndexView {
 <div class='p-6 max-w-40'>
 <h5 class='mb-2 text-sm font-medium text-neutral-800 dark:text-neutral-50'>$year $make $model</h5> 
 <div class='flex justify-center space-x-2'>
-<button type='button' class='inline-block rounded px-6 pt-2.5 pb-2 text-xs bg-primary-600'>$$price/Day </button>
+<button type='button' class='inline-block rounded px-6 pt-2.5 pb-2 text-xs bg-gradient-to-r from-blue-500 to-cyan-400 shadow' data-te-ripple-init>$$price/Day </button>
 </div></div></p></div>";
                 }
             }

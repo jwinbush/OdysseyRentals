@@ -10,30 +10,34 @@ class Database {
 
     //define database parameters
     private $param = array(
-        'host' => 'localhost:3306',
+        'host' => 'localhost',
         'login' => 'root',
         'password' => '',
         'database' => 'rentalcar_db',
         'tblUser' => 'users',
         'tblCar' => 'cars',
-        'tblCarCategories' => 'car_categories'
-       //'tblInventory' => 'inventory'
+        'tblCarUser' => 'car_users',
+        'tblCarCategories' => 'car_categories',
+        'tblInventory' => 'inventory'
     );
     //define the database connection object
     private $objDBConnection = NULL;
     static private $_instance = NULL;
 
     //constructor
-    public function __construct() {
-
+    private function __construct() {
         $this->objDBConnection = @new mysqli(
-            $this->param['host'],
-            $this->param['login'],
-            $this->param['password'],
-            $this->param['database']
+            $this->param['host'], $this->param['login'], $this->param['password'], $this->param['database']
         );
-        if (mysqli_connect_errno() != 0) {
-            exit("Connecting to database failed: " . mysqli_connect_error());
+
+        try {
+            if (mysqli_connect_errno() != 0) {
+                throw new DatabaseException();
+            }
+        } catch (DatabaseException $e) {
+            $message = $e->getDetails();
+            include('application/error.php');
+            exit();
         }
     }
 
@@ -47,7 +51,18 @@ class Database {
 
     //this function returns the database connection object
     public function getConnection() {
-        return $this->objDBConnection;
+        try {
+            if ($this->objDBConnection) {
+                return $this->objDBConnection;
+                // exit();
+            } else {
+                throw new DatabaseException();
+            }
+        } catch (DatabaseException $e) {
+            $message = $e->getDetails();
+            include('application/error.php');
+            exit();
+        }
     }
 
     //returns the name of the table storing users
@@ -65,9 +80,15 @@ class Database {
         return $this->param['tblCarCategories'];
     }
 
+    // returns the name of the table storing car category
+    public function getCarUsersTable() {
+        return $this->param['tblCarUser'];
+    }
+
+
     // returns the name of the table storing inventory
-    /* public function getInventory() {
+    public function getInventory() {
         return $this->param['tblInventory'];
     }
-    */
+
 }

@@ -1,6 +1,5 @@
 <?php
 /**
- * Author: Steven Casada
  * Date: 11/30/2022
  * File: home_index.class.php
  * Description:
@@ -120,20 +119,20 @@ class HomeIndex extends IndexView
                         <div class="bg-white shadow-md p-4">
                             <img src="<?= BASE_URL ?>/www/img/cars/sedan.png" alt="Car Category 1"
                                  class="w-full h-100 object-cover mb-4">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Sedans</h3>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Economy</h3>
                             <p class="text-gray-600">Explore our wide range of sedans for a comfortable and luxurious
                                 driving experience.</p>
-                            <a href="#"
+                            <a href="<?= BASE_URL ?>/car/search?query-terms=economy"
                                class="mt-4 inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold py-2 px-4 rounded">View
                                 Cars</a>
                         </div>
                         <div class="bg-white shadow-md p-4">
                             <img src="<?= BASE_URL ?>/www/img/cars/coupe.png" alt="Car Category 2"
                                  class="w-full h-100 object-cover mb-4">
-                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Coupe</h3>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-2">Luxury</h3>
                             <p class="text-gray-600">Choose from our SUVs collection for a spacious and versatile
                                 driving experience.</p>
-                            <a href="#"
+                            <a href="<?= BASE_URL ?>/car/search?query-terms=luxury"
                                class="mt-4 inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold py-2 px-4 rounded">View
                                 Cars</a>
                         </div>
@@ -143,7 +142,7 @@ class HomeIndex extends IndexView
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Compact</h3>
                             <p class="text-gray-600">Experience the thrill of driving with our convertible cars, perfect
                                 for a stylish and open-air ride.</p>
-                            <a href="#"
+                            <a href="<?= BASE_URL ?>/car/search?query-terms=compact"
                                class="mt-4 inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold py-2 px-4 rounded">View
                                 Cars</a>
                         </div>
@@ -153,7 +152,7 @@ class HomeIndex extends IndexView
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Pick-up</h3>
                             <p class="text-gray-600">Explore our wide range of sedans for a comfortable and luxurious
                                 driving experience.</p>
-                            <a href="#"
+                            <a href="<?= BASE_URL ?>/car/search?query-terms=pickup"
                                class="mt-4 inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold py-2 px-4 rounded">View
                                 Cars</a>
                         </div>
@@ -163,7 +162,7 @@ class HomeIndex extends IndexView
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">SUVs</h3>
                             <p class="text-gray-600">Choose from our SUVs collection for a spacious and versatile
                                 driving experience.</p>
-                            <a href="#"
+                            <a href="<?= BASE_URL ?>/car/search?query-terms=suv"
                                class="mt-4 inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold py-2 px-4 rounded">View
                                 Cars</a>
                         </div>
@@ -173,7 +172,7 @@ class HomeIndex extends IndexView
                             <h3 class="text-xl font-semibold text-gray-800 mb-2">Convertibles</h3>
                             <p class="text-gray-600">Experience the thrill of driving with our convertible cars, perfect
                                 for a stylish and open-air ride.</p>
-                            <a href="<?= BASE_URL ?>/car/search?query-terms=car"
+                            <a href="<?= BASE_URL ?>/car/search?query-terms=convertible"
                                class="mt-4 inline-block bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold py-2 px-4 rounded">View
                                 Cars</a>
                         </div>
