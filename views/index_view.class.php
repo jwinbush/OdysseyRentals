@@ -33,7 +33,7 @@ class IndexView
             <title> <?php echo $page_title ?> </title>
             <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
             <link rel="icon" href='<?= BASE_URL ?>/www/img/cars/odyssey.ico' type="image/png">
-            <link type='text/css' rel='stylesheet' href='<?= BASE_URL ?>/www/css/styles.css'/>
+            <link type='text/css' rel='stylesheet' href='<?= BASE_URL ?>/www/scss/styles.scss'/>
             <!--Tailwind CSS CDN-->
             <script src="https://cdn.tailwindcss.com"></script>
 
@@ -77,7 +77,7 @@ class IndexView
             <nav id="navbar" class="scrolled fixed w-full px-2 sm:px-4 py-2.5 z-50" >
                 <div class="container flex flex-wrap items-center justify-between mx-auto">
                     <a href="<?= BASE_URL ?>" class="flex items-center">
-                        <img src="<?= BASE_URL ?>/www/img/odysseyrental.png" class="lg:h-9 mr-3 h-6"
+                        <img src="<?= BASE_URL ?>/www/img/or-logo.png" class="w-12 mr-2 "
                              alt="Logo"/>
                         <span class="self-center text-xl lg:initial font-semibold whitespace-nowrap dark:text-white">Odyssey</span>
                     </a>
