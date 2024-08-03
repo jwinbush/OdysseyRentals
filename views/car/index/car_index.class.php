@@ -24,29 +24,31 @@ class CarIndex extends CarIndexView
         <div class="h-full text-md px-2 pt-24">
 
             <!-- Tailwind CSS Bread crumb-->
-            <section>
-                <nav class="flex pb-4" aria-label="Breadcrumb">
+            <section class="fleet-wrapper">
+                <nav class="flex pb-4 max-w-[92vw] mx-auto my-0" aria-label="Breadcrumb">
                     <ol class="inline-flex items-center space-x-1 md:space-x-3">
                         <li class="inline-flex items-center">
                             <a href="<?= BASE_URL ?>"
-                               class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                                class="inline-flex items-center text-sm font-medium text-black hover:text-orange-600">
                                 <svg aria-hidden="true" class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                    </path>
                                 </svg>
                                 Home
                             </a>
                         </li>
                         <li>
                             <div class="flex items-center">
-                                <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor"
-                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <svg aria-hidden="true" class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
-                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                          clip-rule="evenodd"></path>
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
                                 </svg>
                                 <a href="<?= BASE_URL ?>/car/index"
-                                   class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2 dark:text-gray-400 dark:hover:text-white">Vehicles</a>
+                                    class="ml-1 text-sm font-medium text-black hover:text-orange-600 md:ml-2">Vehicles</a>
                             </div>
                         </li>
 
@@ -54,8 +56,8 @@ class CarIndex extends CarIndexView
                 </nav>
                 <!-- Tailwind CSS Breadcrumb ending-->
             </section>
-
-            <div class='grid justify-evenly sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+            <div
+                class='pt-[10vh] pb-[10vh] max-w-[92vw] w-full grid justify-evenly sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 mx-auto my-0'>
                 <?php
                 if ($cars === 0) {
                     echo "No cars were found.<br><br><br><br><br>";
@@ -73,15 +75,20 @@ class CarIndex extends CarIndexView
                             $image = BASE_URL . "/" . CAR_IMG . $image;
                         }
 
-                        echo "<div class='rounded-lg backdrop-blur-md shadow-md dark:bg-neutral-700'>
-<p><a href='", BASE_URL, "/car/detail/$id' data-te-ripple-init data-te-ripple-color='light'>
-<img class='rounded-t-lg w-full h-full' src='" . $image . "'></a>
-<div class='p-6 max-w-40'>
-<p class='mb-2 text-sm font-medium text-neutral-800 dark:text-neutral-50'>$category</p> 
-<h5 class='mb-2 text-sm font-medium text-neutral-800 dark:text-neutral-50'>$year $make $model</h5> 
-<div class='flex space-x-2 text-white'>
-<button type='button' class='inline-block rounded px-6 pt-2.5 pb-2 text-xs bg-gradient-to-r from-blue-500 to-cyan-400 shadow' data-te-ripple-init>$$price/Day </button>
-</div></div></p></div>";
+                        echo "<div class='car rounded-lg backdrop-blur-md shadow-md'>
+<div>
+<img class='rounded-t-lg w-full h-full' src='" . $image . "'>
+<div class='p-6'><div class='flex justify-between w-full'><div class='w-8/10'>
+<div class='car-content'>
+<h1 class='text-sm font-medium'>$make</h1><h1>$model</h1><h1>$year</h1></div>
+
+<h2 class='mb-2 text-sm font-medium'>$category</h2> 
+<p>$$price<span>/day</span></p>
+</div>
+
+<div class='flex space-x-2 text-white w-2/10'>
+<a  href='", BASE_URL, "/car/detail/$id' class='car-button' data-te-ripple-init><img class='car-icon' src=' https://cdn-icons-png.flaticon.com/512/7371/7371879.png' alt='Select car'></a>
+</div></div></div></div></div>";
 
                     }
                 }

@@ -1,0 +1,16 @@
+{
+    "name": "odysseyrentals",
+    "version": "1.0.0",
+    "description": "<h1>Odyssey Rentals</h1> <h2>Adding on to group project</h2>",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build:css": "npx tailwindcss -i ./www/scss/tailwind.css -o ./dist/tailwind.css --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "tailwindcss": "^3.4.7"
+    }
+}

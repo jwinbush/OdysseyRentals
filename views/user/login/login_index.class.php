@@ -22,12 +22,12 @@ class UserLogin extends IndexView
         <div class="h-screen md:flex">
             <div
                     class="overflow-hidden md:flex w-3/4 bg-cover bg-center i justify-around items-center hidden" style="background-image: url('https://millionmilesecrets.com/wp-content/uploads/shutterstock_704175295-1.jpg')">
-                <div class="p-8 backdrop-blur-md">
-                    <h1 class="text-black font-bold text-2xl">Odyssey Rentals</h1>
-                    <p class="text-black mt-1">Odyssey Rentals</p>
+                <div class="p-8 backdrop-blur-md w-[35vw]">
+                    <h1 class="text-black font-extrabold text-2xl">Unlock Your Next Adventure</h1>
+                    <p class="text-black mt-1">Become a member to access premium vehicles and special offers</p>
                 <a  href="<?= BASE_URL ?>/user/create">
                     <button type="submit"
-                            class="block w-28 bg-gradient-to-r from-blue-500 to-cyan-400 text-white mt-4 py-2 rounded-lg font-bold mb-2">Sign up
+                            class="sign-up-button block w-28 mt-4">Sign up
                     </button>
                 </a>
                 </div>
@@ -56,9 +56,9 @@ class UserLogin extends IndexView
                         <input class="pl-2 outline-none border-none" type="password" name="password" placeholder="Password" required/>
                     </div>
                     <button type="submit" name="submit"
-                            class="block w-full bg-gradient-to-r from-blue-500 to-cyan-400 text-white mt-4 py-2 rounded-lg text-white font-semibold mb-2">Sign in
+                            class="sign-up-button block w-full mt-4 py-2 rounded-lg text-white mb-2">Sign in
                     </button>
-                    <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
+                    <span class="text-sm ml-2 hover:text-orange-600 cursor-pointer">Forgot Password ?</span>
                     <p class="text-xs ml-2 text-red-500 cursor-pointer"><?php   if (trim($_GET['message']) != "") {
                             echo $message;
                         } ?></p>
@@ -104,27 +104,7 @@ class UserLogin extends IndexView
 <!---->
         </body>
 
-<script >   // Grabs all the Elements by their IDs which we had given them
-    let modal = document.getElementById("defaultModal");
 
-    let btn = document.getElementById("terms");
-
-    let button = document.getElementById("accept");
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-    // We want the modal to close when the OK button is clicked
-    button.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-</script>
         <?php
         //display page footer
         parent::displayFooter();

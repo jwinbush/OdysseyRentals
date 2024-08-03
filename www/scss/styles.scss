@@ -1,19 +1,13 @@
-@font-face {
-    font-family: "Azoniz.otf";
-    src: url(/www/font/Azonix.otf) format("truetype");
-}
+/* styles.css */
 
- :root {
+:root {
     --orange-text: rgb(223, 74, 69);
     --black-text: rgb(0, 0, 0);
+    --gradient: radial-gradient(circle at 10% 20%, rgb(223, 74, 69) 0%, rgb(255, 115, 0) 90%);
 }
 
-* {
-    font-family: "Azonix", sans-serif;
-    font-style: normal;
-    font-weight: 200;
-    text-decoration: none;
-}
+
+/* Apply custom font to all elements */
 
 .container-alt {
     width: 100vw;
@@ -22,10 +16,112 @@
     padding: 0;
 }
 
+#navbar {
+    transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
+}
+
+.logo-text {
+    transition: color 0.5s ease;
+}
+
+.login-icon svg {
+    filter: invert(1);
+}
+
 // HOME 
 .hero-wrapper {
     height: 100vh;
     width: 100vw;
+}
+
+.hero-header {
+    color: white;
+}
+
+.hero-subheader {
+    color: #ffffff;
+}
+
+.reservation {
+    // background-image: radial-gradient(circle, rgba(255, 255, 255, 0.264), rgba(0, 0, 0, 0.404));
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 1vw;
+    color: #fff;
+    border: 1px solid rgba(131, 131, 131, 0.197);
+    .price-range-slider {
+        width: 100%;
+        .range-value {
+            margin: 0;
+            input {
+                width: 100%;
+                background: none;
+                color: #ffffff;
+                font-size: 16px;
+                font-weight: initial;
+                box-shadow: none;
+                border: none;
+                margin: 14px 0 0 0;
+                text-align: center;
+            }
+        }
+        .range-bar {
+            border: none;
+            background: #fff;
+            height: 3px;
+            width: 96%;
+            margin-left: 8px;
+            .ui-slider-range {
+                background: var(--gradient);
+            }
+            .ui-slider-handle {
+                border: none;
+                border-radius: 25px;
+                background: var(--gradient);
+                border: 2px solid var(--orange-text);
+                height: 17px;
+                width: 17px;
+                top: -0.52em;
+                cursor: pointer;
+            }
+            .ui-slider-handle+span {
+                background: var(--gradient);
+            }
+        }
+    }
+    .return {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        flex-direction: row;
+        max-width: 24vw;
+        padding: 0.5vh 2vw;
+        border-radius: 6px;
+        backdrop-filter: blur(8px);
+        background: #ffffff;
+        h1 {
+            font-size: 12px;
+        }
+    }
+}
+
+.reservation-button {
+    cursor: pointer;
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--gradient);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+    line-height: 17px;
+    text-transform: uppercase;
+    color: white;
+    max-width: 10vw;
+    transition: ease-in-out 0.3s;
 }
 
 
@@ -75,6 +171,16 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
+    video:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        background: linear-gradient(to right, rgba(65, 0, 255, 0.4), rgba(255, 0, 232, 0.3));
+    }
     video {
         position: absolute;
         top: 50%;
@@ -83,14 +189,15 @@
         height: 100%;
         object-fit: cover;
         transform: translate(-50%, -50%);
-        z-index: -1;
+        z-index: 0;
     }
     .content {
+        // background-image: radial-gradient(circle, rgba(255, 255, 255, 0.107), rgba(0, 0, 0, 0.404));
         position: relative;
         z-index: 1;
-        color: white;
         /* Change as needed */
         text-align: center;
+        color: rgb(255, 255, 255);
         top: 50%;
         transform: translateY(-50%);
         width: 100%;
@@ -110,20 +217,21 @@
         button {
             cursor: pointer;
             width: 100%;
-            padding: 12px;
-            background: #FFFFFF;
-            border-radius: 41px;
+            padding: 14px;
+            background: var(--gradient);
+            color: #FFFFFF;
+            border-radius: 8px;
             font-weight: 400;
-            font-size: 16px;
+            font-size: 12px;
             line-height: 17px;
             text-transform: uppercase;
-            color: var(--orange-text);
             max-width: 15vw;
-            transition: 0.5s;
+            transition: ease-in-out 0.3s;
             margin: 0 auto;
             &:hover {
-                background: var(--orange-text);
-                color: #FFFFFF;
+                background: #FFFFFF;
+                color: var(--orange-text);
+                scale: 0.95;
             }
         }
     }
@@ -133,35 +241,297 @@
 /* CAR CATERGORY */
 
 .car-categories-wrapper {
+    padding-top: 13vh;
+    padding-bottom: 13vh;
     max-width: 92vw;
     margin: 0 auto;
     .car-categories {
         margin: 0 auto;
         width: 100%;
+        h2 {
+            font-size: 50px;
+            line-height: 45px;
+            font-weight: 400;
+        }
     }
     .cat-cards {
         display: flex;
         flex-direction: column;
-        row-gap: 6px;
+        row-gap: 30px;
         justify-content: space-evenly;
     }
     .cat-card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(131, 131, 131, 0.197);
+        backdrop-filter: blur(8px);
         display: flex;
         flex-direction: row;
-        column-gap: 10vw;
+        column-gap: 2.8vw;
         border-radius: 6px;
-        padding-bottom: 5vh;
-        img {
-            width: 100%;
-            max-width: 30vw!important;
+        .description {
+            align-items: center;
+            column-gap: 2vw;
+            text-align: left;
+            display: grid;
+            grid-template-columns: repeat(2, 12vw);
+            /* 1fr distributes the available space equally among the columns */
+            /* Adds some space between the grid items */
+            div {
+                column-gap: 0.5vw;
+                display: flex;
+                align-items: center;
+                p {
+                    font-weight: bold;
+                }
+                img {
+                    width: 100%;
+                    width: 2vw;
+                }
+            }
         }
-        h3 {}
+        .content {
+            width: 30vw;
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+        }
+        img {
+            width: 28vw;
+        }
+        h3 {
+            font-size: 30px;
+            line-height: 45px;
+            font-weight: 400;
+        }
         p {
             font-weight: 300;
             font-size: 14px;
         }
-        a {}
+        a {
+            cursor: pointer;
+            width: 100%;
+            padding: 14px;
+            background: var(--gradient);
+            border-radius: 8px;
+            font-weight: 300;
+            font-size: 12px;
+            text-align: center;
+            line-height: 17px;
+            text-transform: uppercase;
+            color: white;
+            max-width: 10vw;
+            transition: ease-in-out 0.3s;
+            border: 1px solid transparent;
+            &:hover {
+                scale: 0.95;
+            }
+        }
     }
+}
+
+.how-wrapper {
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    background-image: url('https://images.pexels.com/photos/24789774/pexels-photo-24789774/free-photo-of-car-on-street-in-black-and-white.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+    .how-cards {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 92vw;
+        align-items: center;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-evenly;
+        h2 {
+            color: white;
+        }
+        .card-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 2vw;
+            width: 100%;
+        }
+        .card {
+            border: 1px solid rgba(131, 131, 131, 0.197);
+            color: #ffffff;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            height: 170px;
+            h3 {
+                font-size: 20px;
+                font-weight: 600;
+                padding-bottom: 4px;
+            }
+            p {
+                font-size: 12px;
+                font-weight: 300;
+            }
+            img {
+                filter: invert(1);
+                padding-bottom: 4px;
+            }
+        }
+    }
+    h2 {
+        font-size: 50px;
+        width: 54vw;
+        margin: 0 auto;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: -0.8px;
+    }
+}
+
+.car {
+    overflow: hidden;
+    .car-content {
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.5vw;
+        align-items: center;
+        width: 100%;
+    }
+    h1 {
+        font-size: 20px;
+        font-weight: 600;
+        color: black;
+    }
+    h2 {
+        color: white;
+        background: var(--gradient);
+        padding: 8px;
+        border-radius: 8px;
+        display: inline-block;
+    }
+    p {
+        font-size: 14px;
+        span {
+            font-size: 10px;
+        }
+    }
+    a {
+        border: 1px solid white;
+        cursor: pointer;
+        width: 100%;
+        padding: 8px;
+        background: var(--gradient);
+        border-radius: 8px;
+        font-weight: 300;
+        font-size: 12px;
+        text-align: center;
+        line-height: 17px;
+        text-transform: uppercase;
+        color: white;
+        max-width: 3vw;
+        height: 6vh;
+        transition: ease-in-out 0.3s;
+        &:hover {
+            border: 1px solid black;
+            scale: 0.95;
+        }
+    }
+    .car-icon {
+        filter: invert(1);
+        max-width: 30px;
+    }
+}
+
+.reserve-button {
+    cursor: pointer;
+    width: 100%;
+    padding: 14px;
+    background: var(--gradient);
+    border-radius: 8px;
+    font-weight: 300;
+    font-size: 12px;
+    text-align: center;
+    line-height: 17px;
+    text-transform: uppercase;
+    color: white;
+    max-width: 6vw;
+    transition: ease-in-out 0.3s;
+    border: 1px solid transparent;
+    &:hover {
+        scale: 0.95;
+    }
+}
+
+.sign-up-button {
+    cursor: pointer;
+    width: 100%;
+    padding: 8px;
+    background: var(--gradient);
+    border-radius: 8px;
+    font-weight: 300;
+    font-size: 12px;
+    text-align: center;
+    line-height: 17px;
+    text-transform: uppercase;
+    color: white;
+    max-width: 6vw;
+    transition: ease-in-out 0.3s;
+    border: 1px solid transparent;
+    &:hover {
+        scale: 0.95;
+    }
+}
+
+.news-modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    /* Low backdrop blur effect */
+    .modal-content {
+        backdrop-filter: blur(5px);
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        max-width: 500px;
+        width: 100%;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    /* Low backdrop blur effect */
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    max-width: 500px;
+    width: 100%;
 }
 
 #btn-back-to-top {
